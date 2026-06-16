@@ -2,7 +2,7 @@
   "name": "incentnow",
   "version": "1.0.0",
   "private": true,
-  "description": "IncentNow — AI-First Sales Incentive Compensation Management Platform built on ServiceNow",
+  "description": "IncentIQ — AI-First Sales Incentive Compensation Management Platform built on ServiceNow",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",

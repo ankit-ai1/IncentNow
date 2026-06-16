@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "IncentNow Admin",
-  description: "Admin dashboard for IncentNow",
+  title: "IncentIQ Admin",
+  description: "Admin dashboard for IncentIQ",
   robots: { index: false, follow: false },
 };
 

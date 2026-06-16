@@ -71,7 +71,7 @@ async function main() {
 
   // Default settings
   await Promise.all([
-    prisma.setting.upsert({ where: { key: "site_name" }, update: {}, create: { key: "site_name", value: "IncentNow" } }),
+    prisma.setting.upsert({ where: { key: "site_name" }, update: {}, create: { key: "site_name", value: "IncentIQ" } }),
     prisma.setting.upsert({ where: { key: "site_url" }, update: {}, create: { key: "site_url", value: "https://incentnow.com" } }),
     prisma.setting.upsert({ where: { key: "support_email" }, update: {}, create: { key: "support_email", value: "support@incentnow.com" } }),
   ]);
@@ -106,7 +106,7 @@ async function main() {
           heading: "What good looks like",
           paragraphs: [
             "A modern incentive system treats compensation as governed data, not as a file. Plans are versioned, every calculation is traceable, and results update in real time so Sales, Finance, and Leadership work from one source of truth.",
-            "That's the shift IncentNow makes — moving incentives onto the Now Platform, where governance and scale come standard.",
+            "That's the shift IncentIQ makes — moving incentives onto the Now Platform, where governance and scale come standard.",
           ],
         },
       ]),

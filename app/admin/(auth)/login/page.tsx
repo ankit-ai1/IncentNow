@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { Logo } from "@/components/ui/Logo";
 
 const REMEMBER_KEY = "incentnow_admin_email";
 
@@ -62,13 +63,8 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="mb-8 flex flex-col items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2B4A7F] shadow-md">
-            <span className="text-base font-bold text-white">IN</span>
-          </div>
-          <div className="text-center">
-            <h1 className="text-xl font-bold text-gray-900">IncentNow Admin</h1>
-            <p className="mt-1 text-sm text-gray-500">Sign in to your account</p>
-          </div>
+          <Logo size="lg" />
+          <p className="text-sm text-gray-500">Sign in to your account</p>
         </div>
 
         <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">

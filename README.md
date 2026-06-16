@@ -1,6 +1,6 @@
-# IncentNow
+# IncentIQ
 
-A premium enterprise SaaS marketing site for **IncentNow** — an AI-First Sales
+A premium enterprise SaaS marketing site for **IncentIQ** — an AI-First Sales
 Incentive Compensation Management (ICM) platform built natively on ServiceNow.
 
 Built with **Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion**.
@@ -69,7 +69,7 @@ tailwind.config.ts    Design tokens, animations
 
 1. **Hero** — headline, CTAs, live trust stats, animated dashboard visual
 2. **Problem** — enterprise stat cards + key challenges
-3. **Meet IncentNow** — product pillars + dashboard preview
+3. **Meet IncentIQ** — product pillars + dashboard preview
 4. **Core capabilities** — 8-card grid
 5. **Built on ServiceNow** — architecture diagram + 6 platform pillars
 6. **AI-first intelligence** — 6 AI capabilities + assistant mockup

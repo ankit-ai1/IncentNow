@@ -25,7 +25,7 @@ export function AIIntelligence() {
             align="center"
             eyebrow="AI-FIRST INTELLIGENCE"
             title={<>Intelligence <span className="text-gradient">beyond compensation.</span></>}
-            description="IncentNow uses Now Assist and GenAI to do more than calculate — it forecasts, explains, detects, and acts, with governance always in the loop."
+            description="IncentIQ uses Now Assist and GenAI to do more than calculate — it forecasts, explains, detects, and acts, with governance always in the loop."
           />
         </Reveal>
 

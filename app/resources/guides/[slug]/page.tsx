@@ -10,7 +10,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const guide = getGuide(params.slug);
   if (!guide) return {};
-  return { title: `${guide.title} — IncentNow Guides`, description: guide.excerpt };
+  return { title: `${guide.title} — IncentIQ Guides`, description: guide.excerpt };
 }
 
 export default function GuidePage({ params }: { params: { slug: string } }) {

@@ -8,9 +8,9 @@ import { WhyServiceNow } from "@/components/sections/WhyServiceNow";
 import { PageHero } from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
-  title: "Platform — IncentNow",
+  title: "Platform — IncentIQ",
   description:
-    "The IncentNow platform unifies incentive data, calculations, and AI on ServiceNow — one governed system for the full incentive lifecycle.",
+    "The IncentIQ platform unifies incentive data, calculations, and AI on ServiceNow — one governed system for the full incentive lifecycle.",
 };
 
 export default function PlatformPage() {
@@ -21,7 +21,7 @@ export default function PlatformPage() {
         <PageHero
           eyebrow="PLATFORM"
           title={<>One platform for incentives, <span className="text-gradient">end to end.</span></>}
-          description="IncentNow turns a fragmented, spreadsheet-driven process into a single governed system — data, automation, reporting, and AI in one connected platform built natively on ServiceNow."
+          description="IncentIQ turns a fragmented, spreadsheet-driven process into a single governed system — data, automation, reporting, and AI in one connected platform built natively on ServiceNow."
           primary={{ label: "Book a demo", href: "/book-demo" }}
           secondary={{ label: "See capabilities", href: "/capabilities" }}
         />

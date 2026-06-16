@@ -5,9 +5,9 @@ import { DemoForm } from "./DemoForm";
 import { IconCheck } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
-  title: "Book a demo — IncentNow",
+  title: "Book a demo — IncentIQ",
   description:
-    "See IncentNow in action. Book a personalised walkthrough of AI-first incentive compensation on ServiceNow.",
+    "See IncentIQ in action. Book a personalised walkthrough of AI-first incentive compensation on ServiceNow.",
 };
 
 const proof = [
@@ -34,11 +34,11 @@ export default function BookDemoPage() {
             <div className="lg:sticky lg:top-32">
               <span className="eyebrow">BOOK A DEMO</span>
               <h1 className="mt-4 font-display text-display-1 font-bold text-ink text-balance">
-                See IncentNow{" "}
+                See IncentIQ{" "}
                 <span className="text-gradient">in action.</span>
               </h1>
               <p className="mt-5 max-w-lg text-lead text-ink-2 text-pretty">
-                Get a personalised walkthrough of how IncentNow transforms sales compensation — live on ServiceNow with your use case in focus.
+                Get a personalised walkthrough of how IncentIQ transforms sales compensation — live on ServiceNow with your use case in focus.
               </p>
 
               <ul className="mt-8 space-y-3.5">

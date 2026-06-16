@@ -43,7 +43,7 @@ export const posts: BlogPost[] = [
         heading: "What good looks like",
         paragraphs: [
           "A modern incentive system treats compensation as governed data, not as a file. Plans are versioned, every calculation is traceable, and results update in real time so Sales, Finance, and Leadership work from one source of truth.",
-          "That's the shift IncentNow makes — moving incentives onto the Now Platform, where governance and scale come standard.",
+          "That's the shift IncentIQ makes — moving incentives onto the Now Platform, where governance and scale come standard.",
         ],
       },
     ],

@@ -37,7 +37,7 @@ const groups = [
     title: "Help center",
     body: "Product documentation and answers to get teams up and running fast.",
     items: [
-      "Getting started with IncentNow",
+      "Getting started with IncentIQ",
       "Configuring plans & quotas",
       "Managing disputes and statements",
     ],
@@ -45,9 +45,9 @@ const groups = [
 ];
 
 export const metadata: Metadata = {
-  title: "Resources — IncentNow",
+  title: "Resources — IncentIQ",
   description:
-    "Guides, articles, and help to get the most from IncentNow — AI-first incentive compensation on ServiceNow.",
+    "Guides, articles, and help to get the most from IncentIQ — AI-first incentive compensation on ServiceNow.",
 };
 
 export default function ResourcesPage() {
@@ -57,7 +57,7 @@ export default function ResourcesPage() {
       <main>
         <PageHero
           eyebrow="RESOURCES"
-          title={<>Learn, plan, and <span className="text-gradient">get the most from IncentNow.</span></>}
+          title={<>Learn, plan, and <span className="text-gradient">get the most from IncentIQ.</span></>}
           description="Articles, playbooks, and product help for teams modernizing incentive compensation on ServiceNow."
           primary={{ label: "Book a demo", href: "/book-demo" }}
         />

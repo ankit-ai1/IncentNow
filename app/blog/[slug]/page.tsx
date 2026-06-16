@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: "Post not found" };
 
   return {
-    title: post.metaTitle ?? `${post.title} — IncentNow Blog`,
+    title: post.metaTitle ?? `${post.title} — IncentIQ Blog`,
     description: post.metaDescription ?? post.excerpt ?? undefined,
     robots: {
       index: !post.noIndex,
@@ -78,7 +78,7 @@ export default async function BlogPostPage({ params }: Props) {
           </span>
         </div>
         <div>
-          <p className="text-sm font-medium text-ink">{post.author?.name ?? "IncentNow Team"}</p>
+          <p className="text-sm font-medium text-ink">{post.author?.name ?? "IncentIQ Team"}</p>
           <p className="text-xs text-ink/50">{formatDate(post.publishedAt ?? post.createdAt)}</p>
         </div>
       </div>
@@ -122,7 +122,7 @@ export default async function BlogPostPage({ params }: Props) {
       {/* CTA */}
       <div className="mt-16 rounded-2xl border border-line bg-gradient-to-br from-accent-wash/40 to-sage/20 p-8 text-center">
         <p className="font-display text-2xl font-bold text-ink mb-2">Ready to transform your ICM?</p>
-        <p className="text-ink/60 mb-5">See how IncentNow automates incentive compensation on ServiceNow.</p>
+        <p className="text-ink/60 mb-5">See how IncentIQ automates incentive compensation on ServiceNow.</p>
         <Link
           href="/book-demo"
           className="inline-flex items-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-canvas transition-all hover:bg-accent hover:shadow-[0_6px_20px_rgba(43,74,127,0.3)]"

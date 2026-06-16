@@ -10,7 +10,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const article = getHelpArticle(params.slug);
   if (!article) return {};
-  return { title: `${article.title} — IncentNow Help`, description: article.excerpt };
+  return { title: `${article.title} — IncentIQ Help`, description: article.excerpt };
 }
 
 export default function HelpArticlePage({ params }: { params: { slug: string } }) {

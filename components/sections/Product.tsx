@@ -24,7 +24,7 @@ export function Product() {
               <SectionHeading
                 eyebrow="MEET INCENTNOW"
                 title={<>One platform for incentives, <span className="text-gradient">end to end.</span></>}
-                description="IncentNow unifies incentive data, calculations, and AI on ServiceNow — turning a fragmented, spreadsheet-driven process into a single governed system."
+                description="IncentIQ unifies incentive data, calculations, and AI on ServiceNow — turning a fragmented, spreadsheet-driven process into a single governed system."
               />
             </Reveal>
 

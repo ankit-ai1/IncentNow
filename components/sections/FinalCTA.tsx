@@ -29,7 +29,7 @@ export function FinalCTA() {
                 <span className="text-gradient">Automate incentives.</span>
               </h2>
               <p className="mx-auto mt-6 max-w-2xl text-lead text-ink-2 text-pretty">
-                See how IncentNow turns sales compensation into a transparent, intelligent, governed workflow — built natively on ServiceNow.
+                See how IncentIQ turns sales compensation into a transparent, intelligent, governed workflow — built natively on ServiceNow.
               </p>
 
               <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">

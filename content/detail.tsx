@@ -71,7 +71,7 @@ const platform: DetailContent[] = [
     "ai-intelligence",
     "PLATFORM",
     <>AI intelligence, <span className="text-gradient">woven through every workflow.</span></>,
-    "Forecasting, anomaly detection, and coaching are built into IncentNow — not bolted on — so insight arrives where decisions are made.",
+    "Forecasting, anomaly detection, and coaching are built into IncentIQ — not bolted on — so insight arrives where decisions are made.",
     [
       { icon: IconForecast, title: "Attainment forecasting", body: "See where reps and teams will land before the quarter closes." },
       { icon: IconAnomaly, title: "Anomaly detection", body: "Flag payout outliers and data issues before they reach a statement." },

@@ -9,7 +9,7 @@ import { IconArrow } from "@/components/ui/icons";
 import { guides } from "@/content/guides";
 
 export const metadata: Metadata = {
-  title: "Guides — IncentNow",
+  title: "Guides — IncentIQ",
   description:
     "Step-by-step playbooks and best practices for running modern incentive compensation on ServiceNow.",
 };

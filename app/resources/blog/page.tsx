@@ -9,9 +9,9 @@ import { IconArrow } from "@/components/ui/icons";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
-  title: "Blog — IncentNow",
+  title: "Blog — IncentIQ",
   description:
-    "Perspectives on incentive operations, sales compensation, plan design, and AI in RevOps — from the team building IncentNow.",
+    "Perspectives on incentive operations, sales compensation, plan design, and AI in RevOps — from the team building IncentIQ.",
 };
 
 const categoryColors: Record<string, string> = {

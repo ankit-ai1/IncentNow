@@ -12,9 +12,9 @@ import { IconArrow } from "@/components/ui/icons";
 import { detailByGroup } from "@/content/detail";
 
 export const metadata: Metadata = {
-  title: "Capabilities — IncentNow",
+  title: "Capabilities — IncentIQ",
   description:
-    "From org modeling and quota management to AI-assisted answers for reps, IncentNow covers the full incentive lifecycle on a single platform.",
+    "From org modeling and quota management to AI-assisted answers for reps, IncentIQ covers the full incentive lifecycle on a single platform.",
 };
 
 export default function CapabilitiesPage() {

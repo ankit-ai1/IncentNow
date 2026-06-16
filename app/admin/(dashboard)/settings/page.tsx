@@ -9,7 +9,7 @@ import { Loader2, Save, Eye, EyeOff, Lock } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 
 const DEFAULT_SETTINGS: Record<string, string> = {
-  site_name: "IncentNow",
+  site_name: "IncentIQ",
   site_url: "",
   site_description: "",
   support_email: "",
@@ -130,7 +130,7 @@ export default function SettingsPage() {
             <h2 className="text-sm font-semibold text-gray-900">Footer</h2>
             <div className="space-y-1.5">
               <Label>Footer Text</Label>
-              <Textarea value={settings.footer_text} onChange={(e) => handleChange("footer_text", e.target.value)} rows={2} placeholder="© 2026 IncentNow. All rights reserved." />
+              <Textarea value={settings.footer_text} onChange={(e) => handleChange("footer_text", e.target.value)} rows={2} placeholder="© 2026 IncentIQ. All rights reserved." />
             </div>
           </section>
 

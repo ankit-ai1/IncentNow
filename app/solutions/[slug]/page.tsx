@@ -11,7 +11,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const content = getDetail("solutions", params.slug);
   if (!content) return {};
   const name = params.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  return { title: `${name} — Solutions — IncentNow`, description: content.lead };
+  return { title: `${name} — Solutions — IncentIQ`, description: content.lead };
 }
 
 export default function Page({ params }: { params: { slug: string } }) {

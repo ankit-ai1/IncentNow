@@ -4,7 +4,7 @@ import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog — IncentNow",
+  title: "Blog — IncentIQ",
   description: "Insights, guides, and best practices for incentive compensation management on ServiceNow.",
 };
 

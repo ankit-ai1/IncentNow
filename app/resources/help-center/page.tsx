@@ -9,9 +9,9 @@ import { IconArrow } from "@/components/ui/icons";
 import { helpArticles, helpCategories } from "@/content/help";
 
 export const metadata: Metadata = {
-  title: "Help center — IncentNow",
+  title: "Help center — IncentIQ",
   description:
-    "Product documentation and answers to get your team up and running fast on IncentNow.",
+    "Product documentation and answers to get your team up and running fast on IncentIQ.",
 };
 
 export default function HelpCenterPage() {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/ui/Logo";
 
 const columns = [
   {
@@ -49,13 +50,8 @@ export function Footer() {
 
           {/* brand — fixed width, stays compact */}
           <div className="w-full md:w-52 lg:w-60 shrink-0">
-            <Link href="/" className="inline-flex items-center gap-2">
-              <span className="grid h-8 w-8 place-items-center rounded-xl bg-ink text-canvas">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="M4 16l4-5 3.5 3L20 6" /><path d="M4 20h16" />
-                </svg>
-              </span>
-              <span className="font-display text-[1rem] font-bold tracking-tight text-ink">IncentNow</span>
+            <Link href="/">
+              <Logo size="sm" />
             </Link>
 
             <p className="mt-3 text-[13px] leading-relaxed text-muted">

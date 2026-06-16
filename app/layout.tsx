@@ -25,9 +25,9 @@ const display = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.incentnow.ai"),
-  title: "IncentNow — AI-First Incentive Compensation Management on ServiceNow",
+  title: "IncentIQ — AI-First Incentive Compensation Management on ServiceNow",
   description:
-    "IncentNow transforms sales incentives into transparent, intelligent, and automated workflows. An AI-first Incentive Compensation Management platform built natively on ServiceNow for enterprise scale.",
+    "IncentIQ transforms sales incentives into transparent, intelligent, and automated workflows. An AI-first Incentive Compensation Management platform built natively on ServiceNow for enterprise scale.",
   keywords: [
     "Incentive Compensation Management",
     "ICM",
@@ -38,12 +38,12 @@ export const metadata: Metadata = {
     "AI Sales Operations",
   ],
   openGraph: {
-    title: "IncentNow — AI-First Incentive Compensation Management",
+    title: "IncentIQ — AI-First Incentive Compensation Management",
     description:
       "Transform sales incentives into transparent, intelligent, and automated workflows powered by ServiceNow.",
     type: "website",
     url: "https://www.incentnow.ai",
-    siteName: "IncentNow",
+    siteName: "IncentIQ",
   },
 };
 

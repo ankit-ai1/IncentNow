@@ -103,7 +103,7 @@ export function ArticleDetail({
                       The takeaway
                     </div>
                     <p className="mt-4 text-[16px] leading-relaxed text-ink-2">
-                      IncentNow brings incentive data, calculations, and AI into one governed system on ServiceNow — so compensation is transparent, intelligent, and trusted at enterprise scale.
+                      IncentIQ brings incentive data, calculations, and AI into one governed system on ServiceNow — so compensation is transparent, intelligent, and trusted at enterprise scale.
                     </p>
                     <Link
                       href="/book-demo"

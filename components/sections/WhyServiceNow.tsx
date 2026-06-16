@@ -27,7 +27,7 @@ export function WhyServiceNow() {
           <SectionHeading
             eyebrow="WHY SERVICENOW"
             title={<>Built on the power of <span className="text-gradient">ServiceNow.</span></>}
-            description="IncentNow doesn't sit beside your systems — it runs inside the Now Platform. Governance, security, and scale come standard, so incentives inherit the same trust as the rest of the enterprise."
+            description="IncentIQ doesn't sit beside your systems — it runs inside the Now Platform. Governance, security, and scale come standard, so incentives inherit the same trust as the rest of the enterprise."
           />
         </Reveal>
 

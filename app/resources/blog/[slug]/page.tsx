@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   });
   if (!post) return {};
   return {
-    title: `${post.metaTitle ?? post.title} — IncentNow Blog`,
+    title: `${post.metaTitle ?? post.title} — IncentIQ Blog`,
     description: post.metaDescription ?? post.excerpt ?? undefined,
   };
 }
@@ -113,7 +113,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   <p className="eyebrow">THE TAKEAWAY</p>
                   <p className="mt-3 flex items-start gap-3 text-[15.5px] leading-relaxed text-ink-2">
                     <IconCheck className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                    IncentNow brings incentive data, calculations, and AI into one governed system on ServiceNow — so compensation is transparent, intelligent, and trusted at enterprise scale.
+                    IncentIQ brings incentive data, calculations, and AI into one governed system on ServiceNow — so compensation is transparent, intelligent, and trusted at enterprise scale.
                   </p>
                   <Link
                     href="/book-demo"

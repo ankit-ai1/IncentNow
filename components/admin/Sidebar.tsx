@@ -4,6 +4,7 @@ import { useTransition, useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/ui/Logo";
 import {
   LayoutDashboard,
   CalendarCheck,
@@ -56,11 +57,8 @@ export function Sidebar() {
   return (
     <aside className="flex h-screen w-60 shrink-0 flex-col border-r border-gray-200 bg-white">
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-gray-200 px-5">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2B4A7F]">
-          <span className="text-xs font-bold text-white">IN</span>
-        </div>
-        <span className="font-semibold text-sm text-gray-900">IncentNow Admin</span>
+      <div className="flex h-16 items-center border-b border-gray-200 px-5">
+        <Logo size="sm" />
       </div>
 
       {/* Navigation */}

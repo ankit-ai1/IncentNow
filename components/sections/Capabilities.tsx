@@ -22,7 +22,7 @@ export function Capabilities() {
           <SectionHeading
             eyebrow="CORE CAPABILITIES"
             title={<>Everything incentive operations need, <span className="text-gradient">in one place.</span></>}
-            description="From org modeling to AI-assisted answers for reps, IncentNow covers the full incentive lifecycle on a single platform."
+            description="From org modeling to AI-assisted answers for reps, IncentIQ covers the full incentive lifecycle on a single platform."
           />
         </Reveal>
 

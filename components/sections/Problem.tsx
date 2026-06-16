@@ -69,7 +69,7 @@ export function Problem() {
               From back-office calculations to a governed, intelligent enterprise workflow.
             </p>
             <p className="relative mt-5 text-[15px] leading-relaxed text-ink-2">
-              IncentNow moves incentives onto the Now Platform, where data, automation, and AI finally operate as one — at scale, with trust built in.
+              IncentIQ moves incentives onto the Now Platform, where data, automation, and AI finally operate as one — at scale, with trust built in.
             </p>
             <div className="relative mt-7 flex flex-col gap-2">
               {["Governed by design", "Transparent for every rep", "Intelligent at every step"].map((item) => (

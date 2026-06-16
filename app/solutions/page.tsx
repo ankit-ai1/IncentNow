@@ -46,7 +46,7 @@ const teams = [
 ];
 
 export const metadata: Metadata = {
-  title: "Solutions — IncentNow",
+  title: "Solutions — IncentIQ",
   description:
     "One platform, tailored outcomes for Sales, Finance, RevOps, and Leadership — built natively on ServiceNow.",
 };
@@ -59,7 +59,7 @@ export default function SolutionsPage() {
         <PageHero
           eyebrow="SOLUTIONS"
           title={<>One platform, <span className="text-gradient">outcomes for every team.</span></>}
-          description="IncentNow gives Sales, Finance, RevOps, and Leadership a shared source of truth for incentive compensation — each with the views and controls they need."
+          description="IncentIQ gives Sales, Finance, RevOps, and Leadership a shared source of truth for incentive compensation — each with the views and controls they need."
           primary={{ label: "Book a demo", href: "/book-demo" }}
           secondary={{ label: "Explore capabilities", href: "/capabilities" }}
         />

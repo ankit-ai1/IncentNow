@@ -12,7 +12,7 @@ export type HelpArticle = {
 export const helpArticles: HelpArticle[] = [
   {
     slug: "getting-started-with-incentnow",
-    title: "Getting started with IncentNow",
+    title: "Getting started with IncentIQ",
     excerpt: "Stand up your workspace, model your org, and launch your first incentive plan.",
     category: "Getting started",
     readTime: "4 min read",
@@ -20,7 +20,7 @@ export const helpArticles: HelpArticle[] = [
       {
         heading: "Set up your workspace",
         paragraphs: [
-          "IncentNow runs natively on ServiceNow, so your workspace inherits your existing identity, roles, and access controls. An admin enables the application and assigns the incentive roles.",
+          "IncentIQ runs natively on ServiceNow, so your workspace inherits your existing identity, roles, and access controls. An admin enables the application and assigns the incentive roles.",
         ],
       },
       {
@@ -47,7 +47,7 @@ export const helpArticles: HelpArticle[] = [
       {
         heading: "Assign the right role",
         paragraphs: [
-          "IncentNow uses least-privilege roles: reps see their own data, managers see their teams, and admins configure plans. Assign roles from the user settings panel.",
+          "IncentIQ uses least-privilege roles: reps see their own data, managers see their teams, and admins configure plans. Assign roles from the user settings panel.",
         ],
       },
       {
@@ -152,7 +152,7 @@ export const helpArticles: HelpArticle[] = [
       {
         heading: "Connect your systems",
         paragraphs: [
-          "IncentNow connects to CRM, ERP, HRMS, and warehouses through the Now Platform's integration layer, so results flow in without manual exports.",
+          "IncentIQ connects to CRM, ERP, HRMS, and warehouses through the Now Platform's integration layer, so results flow in without manual exports.",
         ],
       },
       {
@@ -166,7 +166,7 @@ export const helpArticles: HelpArticle[] = [
   {
     slug: "security-and-compliance",
     title: "Security and compliance",
-    excerpt: "How IncentNow inherits enterprise-grade security and governance from ServiceNow.",
+    excerpt: "How IncentIQ inherits enterprise-grade security and governance from ServiceNow.",
     category: "Administration",
     readTime: "4 min read",
     content: [

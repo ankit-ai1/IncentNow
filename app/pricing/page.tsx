@@ -55,13 +55,13 @@ const tiers = [
 
 const faqs = [
   { q: "How is pricing structured?", a: "Pricing is tailored to your organization size and the modules you need. All plans run natively on ServiceNow and are scoped to your contract." },
-  { q: "Do I need an existing ServiceNow instance?", a: "Yes. IncentNow is a native Now Platform application, so you'll need a ServiceNow instance. We can help assess requirements during the demo." },
+  { q: "Do I need an existing ServiceNow instance?", a: "Yes. IncentIQ is a native Now Platform application, so you'll need a ServiceNow instance. We can help assess requirements during the demo." },
   { q: "Can I start small and expand later?", a: "Absolutely. Customers typically start with Growth (quotas + plans) and add AI modules and governance workflows as adoption grows." },
-  { q: "What integrations are supported?", a: "IncentNow integrates with Salesforce, Workday, SAP, NetSuite, HubSpot, and any CRM, ERP, or HRMS with standard connectors." },
+  { q: "What integrations are supported?", a: "IncentIQ integrates with Salesforce, Workday, SAP, NetSuite, HubSpot, and any CRM, ERP, or HRMS with standard connectors." },
 ];
 
 export const metadata: Metadata = {
-  title: "Pricing — IncentNow",
+  title: "Pricing — IncentIQ",
   description:
     "Flexible plans for AI-first incentive compensation on ServiceNow — from growing teams to global enterprises.",
 };

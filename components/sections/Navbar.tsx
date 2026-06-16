@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/Primitives";
+import { Logo } from "../ui/Logo";
 import {
   IconWorkflow, IconScale, IconSpark, IconData,
   IconQuota, IconPlan, IconPerformance, IconStatement, IconDispute, IconAssistant,
@@ -33,7 +34,7 @@ const nav: NavItem[] = [
     label: "Platform",
     href: "/platform",
     menu: {
-      heading: "The IncentNow platform",
+      heading: "The IncentIQ platform",
       blurb: "AI-first incentive compensation, built natively on ServiceNow.",
       items: [
         { icon: IconWorkflow, label: "Platform overview", desc: "One governed system for incentives", href: "/platform" },
@@ -78,7 +79,7 @@ const nav: NavItem[] = [
     href: "/resources",
     menu: {
       heading: "Resources",
-      blurb: "Guides, articles, and help to get the most from IncentNow.",
+      blurb: "Guides, articles, and help to get the most from IncentIQ.",
       items: [
         { icon: IconData, label: "Blog", desc: "Insights on incentive ops", href: "/resources/blog" },
         { icon: IconGovernance, label: "Guides", desc: "Playbooks & best practices", href: "/resources/guides" },
@@ -86,7 +87,6 @@ const nav: NavItem[] = [
       ],
     },
   },
-  { label: "Pricing", href: "/pricing" },
 ];
 
 export function Navbar() {
@@ -124,9 +124,8 @@ export function Navbar() {
         ].join(" ")}
       >
         {/* logo */}
-        <Link href="/" className="flex items-center gap-2.5" aria-label="IncentNow home">
-          <Logo />
-          <span className="font-display text-[1.05rem] font-bold tracking-tight text-ink">IncentNow</span>
+        <Link href="/" aria-label="IncentIQ home">
+          <Logo size="md" />
         </Link>
 
         {/* desktop nav */}
@@ -165,12 +164,6 @@ export function Navbar() {
 
         {/* desktop CTAs */}
         <div className="hidden items-center gap-2 md:flex">
-          <Link
-            href="/pricing"
-            className="rounded-full px-4 py-2 text-[0.85rem] font-semibold text-ink-2 transition-all hover:bg-black/[0.04] hover:text-ink"
-          >
-            Sign in
-          </Link>
           <Link
             href="/book-demo"
             className="inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-[0.85rem] font-semibold text-canvas shadow-[0_2px_10px_rgba(15,27,45,0.18)] transition-all duration-300 hover:bg-accent hover:shadow-[0_6px_20px_rgba(43,74,127,0.3)]"
@@ -253,12 +246,6 @@ export function Navbar() {
 
             {/* mobile CTA strip */}
             <div className="mt-2 space-y-2 border-t border-line pt-3">
-              <Link
-                href="/pricing"
-                className="block w-full rounded-xl border border-line bg-white/70 px-4 py-2.5 text-center text-[0.88rem] font-semibold text-ink"
-              >
-                Sign in
-              </Link>
               <Link
                 href="/book-demo"
                 className="block w-full rounded-xl bg-ink px-4 py-2.5 text-center text-[0.88rem] font-semibold text-canvas"
@@ -393,12 +380,3 @@ function IconChevron({ className }: { className?: string }) {
   );
 }
 
-function Logo() {
-  return (
-    <span className="grid h-8 w-8 place-items-center rounded-xl bg-ink text-canvas shadow-[0_2px_8px_rgba(15,27,45,0.2)]">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <path d="M4 16l4-5 3.5 3L20 6" /><path d="M4 20h16" />
-      </svg>
-    </span>
-  );
-}
