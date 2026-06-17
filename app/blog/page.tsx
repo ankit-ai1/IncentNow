@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function BlogListPage() {
-  const { data: posts = [] } = await supabasePublic
+  const { data } = await supabasePublic
     .from("posts")
     .select("id, title, slug, excerpt, featured_image, published_at, reading_time, author:users(name), category:categories(name)")
     .eq("status", "PUBLISHED")
     .order("published_at", { ascending: false });
+  const posts = data ?? [];
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
