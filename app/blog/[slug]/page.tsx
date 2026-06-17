@@ -52,11 +52,14 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Category + meta */}
       <div className="flex flex-wrap items-center gap-3 mb-5">
-        {post.category && (
-          <span className="rounded-full bg-green px-3 py-1 text-[11.5px] font-semibold text-white">
-            {post.category.name}
-          </span>
-        )}
+        {(() => {
+          const cat = Array.isArray(post.category) ? post.category[0] : post.category;
+          return cat?.name ? (
+            <span className="rounded-full bg-green px-3 py-1 text-[11.5px] font-semibold text-white">
+              {cat.name}
+            </span>
+          ) : null;
+        })()}
         {post.reading_time && (
           <span className="text-sm text-dark-green/50">{post.reading_time} min read</span>
         )}
@@ -71,15 +74,22 @@ export default async function BlogPostPage({ params }: Props) {
       )}
 
       <div className="my-8 flex items-center gap-3">
-        <div className="h-8 w-8 rounded-full bg-gradient-to-br from-green to-accent-green flex items-center justify-center">
-          <span className="text-xs font-bold text-white">
-            {post.author?.name?.[0]?.toUpperCase() ?? "A"}
-          </span>
-        </div>
-        <div>
-          <p className="text-sm font-medium text-dark-green">{post.author?.name ?? "IncentIQ Team"}</p>
-          <p className="text-xs text-dark-green/50">{formatDate(post.published_at ?? post.created_at)}</p>
-        </div>
+        {(() => {
+          const author = Array.isArray(post.author) ? post.author[0] : post.author;
+          return (
+            <>
+              <div className="h-8 w-8 rounded-full bg-gradient-to-br from-green to-accent-green flex items-center justify-center">
+                <span className="text-xs font-bold text-white">
+                  {author?.name?.[0]?.toUpperCase() ?? "A"}
+                </span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-dark-green">{author?.name ?? "IncentIQ Team"}</p>
+                <p className="text-xs text-dark-green/50">{formatDate(post.published_at ?? post.created_at)}</p>
+              </div>
+            </>
+          );
+        })()}
       </div>
 
       {post.featured_image && (

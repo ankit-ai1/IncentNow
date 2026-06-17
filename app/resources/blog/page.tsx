@@ -42,11 +42,12 @@ function formatDate(date: Date | null): string {
 }
 
 export default async function BlogIndexPage() {
-  const { data: posts = [] } = await supabasePublic
+  const { data } = await supabasePublic
     .from("posts")
     .select("id, title, slug, excerpt, published_at, reading_time, author:users(name), category:categories(name)")
     .eq("status", "PUBLISHED")
     .order("published_at", { ascending: false });
+  const posts = data ?? [];
 
   if (!posts.length) {
     return (
@@ -66,7 +67,8 @@ export default async function BlogIndexPage() {
   }
 
   const [featured, ...rest] = posts;
-  const featuredCat = featured.category?.name ?? "";
+  const featuredCat = (Array.isArray(featured.category) ? featured.category[0] : featured.category)?.name ?? "";
+  const featuredAuthor = Array.isArray(featured.author) ? featured.author[0] : featured.author;
 
   return (
     <>
@@ -122,10 +124,10 @@ export default async function BlogIndexPage() {
 
                   <div className="mt-7 flex items-center gap-3 border-t border-light-gray pt-5">
                     <span className="grid h-9 w-9 place-items-center rounded-full bg-light-green font-display text-[12px] font-bold text-dark-green ring-1 ring-light-green">
-                      {initials(featured.author.name ?? "A")}
+                      {initials(featuredAuthor?.name ?? "A")}
                     </span>
                     <div>
-                      <p className="text-[13px] font-semibold text-dark-green">{featured.author.name}</p>
+                      <p className="text-[13px] font-semibold text-dark-green">{featuredAuthor?.name}</p>
                     </div>
                     <span className="ml-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-green transition-transform group-hover:translate-x-0.5">
                       Read article
@@ -146,7 +148,8 @@ export default async function BlogIndexPage() {
             </Reveal>
             <RevealGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {rest.map((post, idx) => {
-                const cat = post.category?.name ?? "";
+                const cat = (Array.isArray(post.category) ? post.category[0] : post.category)?.name ?? "";
+                const postAuthor = Array.isArray(post.author) ? post.author[0] : post.author;
                 return (
                   <RevealItem key={post.slug}>
                     <Link
@@ -192,9 +195,9 @@ export default async function BlogIndexPage() {
                         <p className="mt-2 flex-1 text-[13.5px] leading-relaxed text-slate">{post.excerpt}</p>
                         <div className="mt-5 flex items-center gap-2.5 border-t border-light-gray pt-4">
                           <span className="grid h-8 w-8 place-items-center rounded-full bg-light-green text-[11px] font-bold text-dark-green ring-1 ring-light-green">
-                            {initials(post.author.name ?? "A")}
+                            {initials(postAuthor?.name ?? "A")}
                           </span>
-                          <span className="text-[12.5px] font-medium text-navy">{post.author.name}</span>
+                          <span className="text-[12.5px] font-medium text-navy">{postAuthor?.name}</span>
                           <IconArrow className="ml-auto h-4 w-4 text-slate transition-all group-hover:translate-x-0.5 group-hover:text-green" />
                         </div>
                       </div>

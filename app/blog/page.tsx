@@ -13,7 +13,7 @@ export const revalidate = 60;
 export default async function BlogListPage() {
   const { data } = await supabasePublic
     .from("posts")
-    .select("id, title, slug, excerpt, featured_image, published_at, reading_time, author:users(name), category:categories(name)")
+    .select("id, title, slug, excerpt, featured_image, published_at, created_at, reading_time, author:users(name), category:categories(name)")
     .eq("status", "PUBLISHED")
     .order("published_at", { ascending: false });
   const posts = data ?? [];

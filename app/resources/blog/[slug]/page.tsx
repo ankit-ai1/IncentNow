@@ -41,13 +41,14 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
   if (!post) notFound();
 
-  const { data: related = [] } = await supabasePublic
+  const { data: relatedData } = await supabasePublic
     .from("posts")
     .select("title, slug, excerpt, category:categories(name)")
     .eq("status", "PUBLISHED")
     .neq("slug", post.slug)
     .order("published_at", { ascending: false })
     .limit(3);
+  const related = relatedData ?? [];
 
   return (
     <>
@@ -67,11 +68,14 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               </Link>
 
               <div className="mt-6 flex flex-wrap items-center gap-3 text-[12.5px] font-medium text-slate">
-                {post.category && (
-                  <span className="rounded-full bg-light-green px-3 py-1 font-semibold text-dark-green">
-                    {post.category.name}
-                  </span>
-                )}
+                {(() => {
+                  const cat = Array.isArray(post.category) ? post.category[0] : post.category;
+                  return cat?.name ? (
+                    <span className="rounded-full bg-light-green px-3 py-1 font-semibold text-dark-green">
+                      {cat.name}
+                    </span>
+                  ) : null;
+                })()}
                 <span>{formatDate(post.published_at)}</span>
                 {post.reading_time && (
                   <>
@@ -86,14 +90,19 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <p className="mt-5 text-lead text-navy text-pretty">{post.excerpt}</p>
               )}
 
-              <div className="mt-8 flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-white font-display text-sm font-bold text-dark-green shadow-soft ring-1 ring-light-gray">
-                  {initials(post.author.name ?? "A")}
-                </span>
-                <div className="text-[13.5px]">
-                  <p className="font-semibold text-dark-green">{post.author.name}</p>
-                </div>
-              </div>
+              {(() => {
+                const author = Array.isArray(post.author) ? post.author[0] : post.author;
+                return (
+                  <div className="mt-8 flex items-center gap-3">
+                    <span className="grid h-11 w-11 place-items-center rounded-full bg-white font-display text-sm font-bold text-dark-green shadow-soft ring-1 ring-light-gray">
+                      {initials(author?.name ?? "A")}
+                    </span>
+                    <div className="text-[13.5px]">
+                      <p className="font-semibold text-dark-green">{author?.name}</p>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </section>
@@ -145,11 +154,14 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {related.map((r) => (
                   <Link key={r.slug} href={`/resources/blog/${r.slug}`} className="card group flex h-full flex-col p-6">
-                    {r.category && (
-                      <span className="w-fit rounded-full bg-light-green px-2.5 py-1 text-[11px] font-semibold text-dark-green">
-                        {r.category.name}
-                      </span>
-                    )}
+                    {(() => {
+                      const rCat = Array.isArray(r.category) ? r.category[0] : r.category;
+                      return rCat?.name ? (
+                        <span className="w-fit rounded-full bg-light-green px-2.5 py-1 text-[11px] font-semibold text-dark-green">
+                          {rCat.name}
+                        </span>
+                      ) : null;
+                    })()}
                     <h3 className="mt-4 font-display text-[17px] font-bold leading-snug text-dark-green transition-colors group-hover:text-green">{r.title}</h3>
                     <p className="mt-2 flex-1 text-[13px] leading-relaxed text-slate">{r.excerpt}</p>
                     <span className="mt-4 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-green transition-transform group-hover:translate-x-0.5">
