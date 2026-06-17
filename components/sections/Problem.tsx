@@ -165,7 +165,7 @@ function PairRow({ problem, shift, featured = false, problemNode, sheenDelay }: 
           <div
             aria-hidden
             className="pointer-events-none absolute inset-y-0 left-0 w-[28%] bg-gradient-to-r from-transparent via-white/55 to-transparent motion-safe:animate-sheen-loop"
-            style={{ animationDelay: sheenDelay, skewX: "-10deg" }}
+            style={{ animationDelay: sheenDelay, transform: "skewX(-10deg)" }}
           />
           {/* Soft pulsing green glow underlay */}
           <div
