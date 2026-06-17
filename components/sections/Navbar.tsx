@@ -165,6 +165,12 @@ export function Navbar() {
         {/* desktop CTAs */}
         <div className="hidden items-center gap-2 md:flex">
           <Link
+            href="/product-tour"
+            className="inline-flex items-center rounded-full bg-white/85 px-5 py-2.5 text-[0.85rem] font-semibold text-ink shadow-soft ring-1 ring-line backdrop-blur transition-all duration-300 hover:text-accent hover:ring-accent/40"
+          >
+            Product Tour
+          </Link>
+          <Link
             href="/book-demo"
             className="inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-[0.85rem] font-semibold text-canvas shadow-[0_2px_10px_rgba(15,27,45,0.18)] transition-all duration-300 hover:bg-accent hover:shadow-[0_6px_20px_rgba(43,74,127,0.3)]"
           >
@@ -246,6 +252,12 @@ export function Navbar() {
 
             {/* mobile CTA strip */}
             <div className="mt-2 space-y-2 border-t border-line pt-3">
+              <Link
+                href="/product-tour"
+                className="block w-full rounded-xl bg-canvas px-4 py-2.5 text-center text-[0.88rem] font-semibold text-ink ring-1 ring-line transition-colors hover:text-accent hover:ring-accent/40"
+              >
+                Product Tour
+              </Link>
               <Link
                 href="/book-demo"
                 className="block w-full rounded-xl bg-ink px-4 py-2.5 text-center text-[0.88rem] font-semibold text-canvas"

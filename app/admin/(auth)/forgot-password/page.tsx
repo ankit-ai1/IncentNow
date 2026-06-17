@@ -4,15 +4,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Eye, EyeOff, Loader2, CheckCircle2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, CheckCircle2, ArrowLeft, KeyRound } from "lucide-react";
 import Link from "next/link";
+import { LogoMark } from "@/components/ui/Logo";
 
 const schema = z
   .object({
-    email: z.string().email("Invalid email address"),
-    newPassword: z.string().min(8, "Password must be at least 8 characters"),
+    email:           z.string().email("Invalid email address"),
+    newPassword:     z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string(),
   })
   .refine((d) => d.newPassword === d.confirmPassword, {
@@ -23,16 +22,13 @@ const schema = z
 type FormInput = z.infer<typeof schema>;
 
 export default function ForgotPasswordPage() {
-  const [showNew, setShowNew] = useState(false);
+  const [showNew, setShowNew]         = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [done, setDone] = useState(false);
-  const [error, setError] = useState("");
+  const [done, setDone]               = useState(false);
+  const [error, setError]             = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<FormInput>({ resolver: zodResolver(schema) });
+  const { register, handleSubmit, formState: { errors, isSubmitting } } =
+    useForm<FormInput>({ resolver: zodResolver(schema) });
 
   async function onSubmit(data: FormInput) {
     setError("");
@@ -50,95 +46,138 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-sm">
-        <div className="mb-8 flex flex-col items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2B4A7F] shadow-md">
-            <span className="text-base font-bold text-white">IN</span>
-          </div>
-          <div className="text-center">
-            <h1 className="text-xl font-bold text-gray-900">Reset Password</h1>
-            <p className="mt-1 text-sm text-gray-500">Enter your email and set a new password</p>
-          </div>
+    <div className="mesh grain min-h-screen flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-[420px]">
+
+        {/* Logo */}
+        <div className="mb-8 flex items-center gap-2.5">
+          <LogoMark className="h-8 w-auto" />
+          <span className="font-display text-lg font-extrabold tracking-tight text-ink">
+            Incent<span className="text-accent">IQ</span>
+          </span>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="card">
           {done ? (
-            <div className="flex flex-col items-center gap-3 py-4 text-center">
-              <CheckCircle2 className="h-10 w-10 text-green-500" />
-              <p className="font-semibold text-gray-900">Password updated!</p>
-              <p className="text-sm text-gray-500">You can now sign in with your new password.</p>
+            /* ── Success state ── */
+            <div className="flex flex-col items-center gap-5 p-10 text-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 ring-2 ring-emerald-100">
+                <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+              </div>
+              <div className="space-y-1.5">
+                <h2 className="font-display text-xl font-bold text-ink">Password updated!</h2>
+                <p className="text-sm text-muted">
+                  Your password has been reset. You can now sign in with your new credentials.
+                </p>
+              </div>
               <Link
                 href="/admin/login"
-                className="mt-2 rounded-lg bg-[#2B4A7F] px-5 py-2 text-sm font-semibold text-white hover:bg-[#1b3a6e] transition-colors"
+                className="mt-2 flex items-center gap-2 rounded-full bg-ink px-6 py-2.5 text-sm font-semibold text-canvas shadow-[0_2px_10px_rgba(15,27,45,0.18)] transition-all duration-300 hover:bg-accent hover:shadow-[0_8px_24px_rgba(43,74,127,0.28)]"
               >
-                Back to login
+                <ArrowLeft className="h-4 w-4" />
+                Back to sign in
               </Link>
             </div>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              {error && (
-                <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600">
-                  {error}
+            /* ── Form ── */
+            <div className="p-8">
+              {/* Header */}
+              <div className="mb-7 flex items-start gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft ring-1 ring-accent/10">
+                  <KeyRound className="h-5 w-5 text-accent" />
                 </div>
-              )}
-
-              <div className="space-y-1.5">
-                <Label htmlFor="email">Registered Email</Label>
-                <Input id="email" type="email" placeholder="admin@company.com" {...register("email")} />
-                {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
+                <div>
+                  <h2 className="font-display text-xl font-bold text-ink">Reset password</h2>
+                  <p className="mt-0.5 text-[13px] text-muted">Enter your email and choose a new password</p>
+                </div>
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="newPassword">New Password</Label>
-                <div className="relative">
-                  <Input
-                    id="newPassword"
-                    type={showNew ? "text" : "password"}
-                    placeholder="Min 8 characters"
-                    className="pr-10"
-                    {...register("newPassword")}
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+
+                {error && (
+                  <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" />
+                    <p className="text-[13px] leading-snug text-red-700">{error}</p>
+                  </div>
+                )}
+
+                {/* Email */}
+                <div className="space-y-1.5">
+                  <label htmlFor="email" className="block text-[13px] font-semibold text-ink-2">
+                    Registered email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="admin@company.com"
+                    {...register("email")}
+                    className="block w-full rounded-xl border border-line bg-surface px-4 py-2.5 text-sm text-ink placeholder-muted/50 outline-none transition-all focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20"
                   />
-                  <button type="button" onClick={() => setShowNew(!showNew)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                    {showNew ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
+                  {errors.email && <p className="text-[12px] text-red-600">{errors.email.message}</p>}
                 </div>
-                {errors.newPassword && <p className="text-xs text-red-500">{errors.newPassword.message}</p>}
-              </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                <div className="relative">
-                  <Input
-                    id="confirmPassword"
-                    type={showConfirm ? "text" : "password"}
-                    placeholder="Repeat password"
-                    className="pr-10"
-                    {...register("confirmPassword")}
-                  />
-                  <button type="button" onClick={() => setShowConfirm(!showConfirm)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                    {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
+                {/* New password */}
+                <div className="space-y-1.5">
+                  <label htmlFor="newPassword" className="block text-[13px] font-semibold text-ink-2">
+                    New password
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="newPassword"
+                      type={showNew ? "text" : "password"}
+                      placeholder="Min 8 characters"
+                      {...register("newPassword")}
+                      className="block w-full rounded-xl border border-line bg-surface px-4 py-2.5 pr-11 text-sm text-ink placeholder-muted/50 outline-none transition-all focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20"
+                    />
+                    <button type="button" tabIndex={-1} onClick={() => setShowNew(!showNew)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink-2 transition-colors">
+                      {showNew ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                  {errors.newPassword && <p className="text-[12px] text-red-600">{errors.newPassword.message}</p>}
                 </div>
-                {errors.confirmPassword && <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>}
-              </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#2B4A7F] py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1b3a6e] disabled:opacity-60"
-              >
-                {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
-                {isSubmitting ? "Updating…" : "Reset Password"}
-              </button>
+                {/* Confirm password */}
+                <div className="space-y-1.5">
+                  <label htmlFor="confirmPassword" className="block text-[13px] font-semibold text-ink-2">
+                    Confirm new password
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="confirmPassword"
+                      type={showConfirm ? "text" : "password"}
+                      placeholder="Repeat password"
+                      {...register("confirmPassword")}
+                      className="block w-full rounded-xl border border-line bg-surface px-4 py-2.5 pr-11 text-sm text-ink placeholder-muted/50 outline-none transition-all focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20"
+                    />
+                    <button type="button" tabIndex={-1} onClick={() => setShowConfirm(!showConfirm)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink-2 transition-colors">
+                      {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                  {errors.confirmPassword && <p className="text-[12px] text-red-600">{errors.confirmPassword.message}</p>}
+                </div>
 
-              <p className="text-center text-xs text-gray-500">
-                Remembered it?{" "}
-                <Link href="/admin/login" className="text-[#2B4A7F] hover:underline">
-                  Back to login
-                </Link>
-              </p>
-            </form>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-ink py-3 text-sm font-semibold text-canvas shadow-[0_2px_10px_rgba(15,27,45,0.18)] transition-all duration-300 hover:bg-accent hover:shadow-[0_8px_24px_rgba(43,74,127,0.28)] disabled:opacity-50"
+                >
+                  {isSubmitting
+                    ? <><Loader2 className="h-4 w-4 animate-spin" /> Updating password…</>
+                    : "Reset password"
+                  }
+                </button>
+
+                <p className="text-center text-[12.5px] text-muted">
+                  Remembered it?{" "}
+                  <Link href="/admin/login" className="font-semibold text-accent transition-colors hover:text-accent-600">
+                    Back to sign in
+                  </Link>
+                </p>
+              </form>
+            </div>
           )}
         </div>
       </div>

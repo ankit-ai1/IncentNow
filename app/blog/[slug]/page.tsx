@@ -29,14 +29,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  const posts = await prisma.post.findMany({
-    where: { status: "PUBLISHED" },
-    select: { slug: true },
-  });
-  return posts.map((p: { slug: string }) => ({ slug: p.slug }));
-}
-
 export default async function BlogPostPage({ params }: Props) {
   const post = await prisma.post.findFirst({
     where: { slug: params.slug, status: "PUBLISHED" },

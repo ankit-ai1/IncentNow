@@ -34,6 +34,9 @@ export function Hero() {
             <Button href="/book-demo" variant="primary" className="px-7 py-3.5 text-base">
               Book a demo
             </Button>
+            <Button href="/product-tour" variant="secondary" className="px-7 py-3.5 text-base">
+              Product Tour
+            </Button>
             <Button href="#product" variant="secondary" className="px-7 py-3.5 text-base">
               Explore platform
             </Button>
