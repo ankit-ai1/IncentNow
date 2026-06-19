@@ -1,14 +1,14 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/Primitives";
-import { Logo } from "../ui/Logo";
+import { LogoMark } from "../ui/Logo";
 import {
   IconWorkflow, IconScale, IconSpark, IconData,
   IconQuota, IconPlan, IconPerformance, IconStatement, IconDispute, IconAssistant,
-  IconVisibility, IconGovernance, IconArrow,
+  IconVisibility, IconGovernance, IconArrow, IconOrg,
   type IconProps,
 } from "../ui/icons";
 
@@ -19,13 +19,19 @@ type MenuItem = {
   icon: (p: IconProps) => JSX.Element;
 };
 
+type NavGroup = {
+  label: string;
+  items: MenuItem[];
+};
+
 type NavItem = {
   label: string;
   href: string;
   menu?: {
     heading: string;
     blurb?: string;
-    items: MenuItem[];
+    items?: MenuItem[];
+    groups?: NavGroup[];
   };
 };
 
@@ -37,10 +43,10 @@ const nav: NavItem[] = [
       heading: "The IncentIQ platform",
       blurb: "AI-first incentive compensation, built natively on ServiceNow.",
       items: [
-        { icon: IconWorkflow, label: "Platform overview", desc: "One governed system for incentives", href: "/platform" },
-        { icon: IconData, label: "Unified data model", desc: "A single source of truth", href: "/platform/unified-data-model" },
-        { icon: IconSpark, label: "AI intelligence", desc: "Forecasting, anomalies, coaching", href: "/platform/ai-intelligence" },
-        { icon: IconScale, label: "Built on ServiceNow", desc: "Enterprise scale & governance", href: "/why-servicenow" },
+        { icon: IconData, label: "Unified Data Model", desc: "One source of truth for all incentive data", href: "/platform/unified-data-model" },
+        { icon: IconSpark, label: "AI Intelligence", desc: "AI that explains, predicts, and optimizes", href: "/platform/ai-intelligence" },
+        { icon: IconScale, label: "Built on ServiceNow", desc: "Enterprise-ready from day one", href: "/platform/built-on-servicenow" },
+        { icon: IconGovernance, label: "Enterprise Governance", desc: "Controls, approvals, and audit readiness", href: "/platform/enterprise-governance" },
       ],
     },
   },
@@ -48,29 +54,46 @@ const nav: NavItem[] = [
     label: "Capabilities",
     href: "/capabilities",
     menu: {
-      heading: "Core capabilities",
-      blurb: "Everything incentive operations need, in one place.",
-      items: [
-        { icon: IconQuota, label: "Quota management", desc: "Set, distribute & adjust quotas", href: "/capabilities/quota-management" },
-        { icon: IconPlan, label: "Incentive plans", desc: "Tiers, accelerators & rules", href: "/capabilities/incentive-plans" },
-        { icon: IconPerformance, label: "Performance tracking", desc: "Real-time attainment", href: "/capabilities/performance-tracking" },
-        { icon: IconStatement, label: "Statements", desc: "Clear, itemized payouts", href: "/capabilities/statements" },
-        { icon: IconDispute, label: "Dispute resolution", desc: "Governed investigation flow", href: "/capabilities/dispute-resolution" },
-        { icon: IconAssistant, label: "AI assistant", desc: "Instant answers for reps", href: "/capabilities/ai-assistant" },
+      heading: "Capabilities",
+      groups: [
+        {
+          label: "Design",
+          items: [
+            { icon: IconOrg, label: "Organization", desc: "Hierarchies & participant assignments", href: "/capabilities/organization-management" },
+            { icon: IconQuota, label: "Quotas", desc: "Set, distribute & adjust quotas", href: "/capabilities/quota-management" },
+            { icon: IconPlan, label: "Plans", desc: "Design incentive plans & rules", href: "/capabilities/incentive-plans" },
+          ],
+        },
+        {
+          label: "Operate",
+          items: [
+            { icon: IconScale, label: "Calculations", desc: "Automated & traceable processing", href: "/capabilities/calculations" },
+            { icon: IconStatement, label: "Statements", desc: "Clear, itemised payouts", href: "/capabilities/statements" },
+            { icon: IconDispute, label: "Disputes", desc: "Governed investigation flow", href: "/capabilities/dispute-resolution" },
+          ],
+        },
+        {
+          label: "Optimize",
+          items: [
+            { icon: IconPerformance, label: "Performance Tracking", desc: "Real-time attainment tracking", href: "/capabilities/performance-tracking" },
+            { icon: IconVisibility, label: "Reports", desc: "Dashboards & analytics", href: "/capabilities/reports-analytics" },
+            { icon: IconAssistant, label: "AI Assistant", desc: "Instant answers for reps", href: "/capabilities/ai-assistant" },
+          ],
+        },
       ],
     },
   },
   {
-    label: "Solutions",
-    href: "/solutions",
+    label: "Teams",
+    href: "/teams",
     menu: {
-      heading: "Solutions by team",
-      blurb: "One platform, tailored outcomes for every stakeholder.",
+      heading: "Teams",
+      blurb: "One platform, distinct outcomes for every team.",
       items: [
-        { icon: IconPerformance, label: "Sales teams", desc: "Clarity on earnings & quota", href: "/solutions/sales" },
-        { icon: IconStatement, label: "Finance", desc: "Accurate, auditable payouts", href: "/solutions/finance" },
-        { icon: IconWorkflow, label: "RevOps", desc: "Plan design without spreadsheets", href: "/solutions/revops" },
-        { icon: IconVisibility, label: "Leadership", desc: "Real-time performance visibility", href: "/solutions/leadership" },
+        { icon: IconPerformance, label: "Sales", desc: "Real-time earnings & AI guidance", href: "/teams/sales" },
+        { icon: IconWorkflow, label: "RevOps", desc: "Plan design & governed deployment", href: "/teams/revops" },
+        { icon: IconStatement, label: "Finance", desc: "Auditability & accurate payouts", href: "/teams/finance" },
+        { icon: IconVisibility, label: "Leadership", desc: "Performance visibility & forecasting", href: "/teams/leadership" },
       ],
     },
   },
@@ -79,11 +102,11 @@ const nav: NavItem[] = [
     href: "/resources",
     menu: {
       heading: "Resources",
-      blurb: "Guides, articles, and help to get the most from IncentIQ.",
+      blurb: "Thought leadership, analyst insights, and practical guidance for incentive excellence.",
       items: [
-        { icon: IconData, label: "Blog", desc: "Insights on incentive ops", href: "/resources/blog" },
+        { icon: IconData, label: "Blog", desc: "Insights on compensation strategy & AI", href: "/resources/blog" },
         { icon: IconGovernance, label: "Guides", desc: "Playbooks & best practices", href: "/resources/guides" },
-        { icon: IconAssistant, label: "Help center", desc: "Docs & product answers", href: "/resources/help-center" },
+        { icon: IconVisibility, label: "Analyst Insights", desc: "Research, benchmarks & market trends", href: "/resources/analyst-insights" },
       ],
     },
   },
@@ -124,8 +147,15 @@ export function Navbar() {
         ].join(" ")}
       >
         {/* logo */}
-        <Link href="/" aria-label="IncentIQ home">
-          <Logo size="md" />
+        <Link href="/" aria-label="IncentIQ home" className="inline-flex items-center gap-2">
+          <LogoMark className="h-8 w-auto shrink-0" />
+          <span
+            className="font-display text-[1.55rem] font-extrabold leading-none tracking-[-0.02em] select-none"
+            aria-hidden="true"
+          >
+            <span style={{ color: "#0B1D2D" }}>Incent</span>
+            <span style={{ color: "#00A651" }}>IQ</span>
+          </span>
         </Link>
 
         {/* desktop nav */}
@@ -199,57 +229,66 @@ export function Navbar() {
       {open ? (
         <div className="glass mx-auto mt-2 max-w-shell overflow-hidden rounded-2xl p-3 shadow-float md:hidden">
           <div className="flex flex-col gap-0.5">
-            {nav.map((item) => (
-              <div key={item.label}>
-                {item.menu ? (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setMobileExpanded((v) => (v === item.label ? null : item.label))
-                      }
-                      className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-[0.88rem] font-semibold text-dark-green hover:bg-white/80"
+            {nav.map((item) => {
+              // Flatten groups into a single list for mobile
+              const mobileItems: MenuItem[] = item.menu
+                ? item.menu.groups
+                  ? item.menu.groups.flatMap((g) => g.items)
+                  : (item.menu.items ?? [])
+                : [];
+
+              return (
+                <div key={item.label}>
+                  {item.menu ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setMobileExpanded((v) => (v === item.label ? null : item.label))
+                        }
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-[0.88rem] font-semibold text-dark-green hover:bg-white/80"
+                      >
+                        {item.label}
+                        <IconChevron
+                          className={`h-4 w-4 text-slate transition-transform duration-200 ${
+                            mobileExpanded === item.label ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      {mobileExpanded === item.label ? (
+                        <div className="mb-1 ml-2 mt-0.5 flex flex-col gap-0.5 border-l-2 border-light-green pl-3">
+                          <Link
+                            href={item.href}
+                            onClick={() => setOpen(false)}
+                            className="rounded-lg px-3 py-2 text-[13px] font-semibold text-green hover:bg-white/70"
+                          >
+                            {item.menu.heading} overview
+                          </Link>
+                          {mobileItems.map((sub) => (
+                            <Link
+                              key={sub.label}
+                              href={sub.href}
+                              onClick={() => setOpen(false)}
+                              className="rounded-lg px-3 py-2 text-[13px] font-medium text-navy hover:bg-white/70 hover:text-green"
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : null}
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-xl px-3 py-2.5 text-[0.88rem] font-semibold text-dark-green hover:bg-white/80"
                     >
                       {item.label}
-                      <IconChevron
-                        className={`h-4 w-4 text-slate transition-transform duration-200 ${
-                          mobileExpanded === item.label ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                    {mobileExpanded === item.label ? (
-                      <div className="mb-1 ml-2 mt-0.5 flex flex-col gap-0.5 border-l-2 border-light-green pl-3">
-                        <Link
-                          href={item.href}
-                          onClick={() => setOpen(false)}
-                          className="rounded-lg px-3 py-2 text-[13px] font-semibold text-green hover:bg-white/70"
-                        >
-                          {item.menu.heading} overview
-                        </Link>
-                        {item.menu.items.map((sub) => (
-                          <Link
-                            key={sub.label}
-                            href={sub.href}
-                            onClick={() => setOpen(false)}
-                            className="rounded-lg px-3 py-2 text-[13px] font-medium text-navy hover:bg-white/70 hover:text-green"
-                          >
-                            {sub.label}
-                          </Link>
-                        ))}
-                      </div>
-                    ) : null}
-                  </>
-                ) : (
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-xl px-3 py-2.5 text-[0.88rem] font-semibold text-dark-green hover:bg-white/80"
-                  >
-                    {item.label}
-                  </Link>
-                )}
-              </div>
-            ))}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
 
             {/* mobile CTA strip */}
             <div className="mt-2 space-y-2 border-t border-light-gray pt-3">
@@ -278,106 +317,119 @@ function MegaMenu({ item }: { item: NavItem }) {
   const pathname = usePathname();
   if (!item.menu) return null;
 
-  return (
-    <div className="absolute left-0 top-full z-[60] w-[23rem] pt-3">
-      <div
-        className="animate-menu-in rounded-2xl border border-light-gray p-2 shadow-[0_16px_40px_-8px_rgba(11,29,45,0.24),0_40px_80px_-20px_rgba(11,29,45,0.18)]"
-        style={{ backgroundColor: "#ffffff", opacity: 1 }}
-      >
-        {/* section label */}
-        <div className="flex items-center gap-2.5 px-3.5 pb-2 pt-2.5">
-          <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-green/70">
-            {item.label}
+  const isGrouped = !!item.menu.groups;
+  const itemCount = item.menu.items?.length ?? 0;
+  // Capabilities gets wider card for 2-col layout; Resources/Teams are narrower
+  const dropdownWidth = isGrouped ? "660px" : itemCount <= 3 ? "280px" : "300px";
+
+  function SubItem({ sub }: { sub: MenuItem }) {
+    const active =
+      pathname === sub.href || (sub.href !== "/" && pathname.startsWith(sub.href));
+    return (
+      <li>
+        <Link
+          href={sub.href}
+          className={[
+            "group/item flex items-center gap-2.5 rounded-lg px-[10px] py-2 transition-all duration-150",
+            active ? "bg-[#E8F5E9]" : "hover:bg-[#E8F5E9]",
+          ].join(" ")}
+        >
+          {/* 28×28 icon */}
+          <span
+            className={[
+              "grid h-7 w-7 shrink-0 place-items-center rounded-lg transition-all duration-150",
+              active
+                ? "bg-[#00A651]"
+                : "bg-[#E8F5E9] group-hover/item:bg-[#00A651]",
+            ].join(" ")}
+          >
+            <sub.icon
+              className={[
+                "h-3.5 w-3.5 transition-colors duration-150",
+                active ? "text-white" : "text-[#00A651] group-hover/item:text-white",
+              ].join(" ")}
+            />
           </span>
-          <span className="h-px flex-1 bg-gradient-to-r from-line to-transparent" />
+
+          {/* label + desc */}
+          <span className="min-w-0 flex-1">
+            <span
+              className={[
+                "block text-[13px] font-semibold leading-tight transition-colors duration-150",
+                active
+                  ? "text-[#00A651]"
+                  : "text-[#0B1D2D] group-hover/item:text-[#00A651]",
+              ].join(" ")}
+            >
+              {sub.label}
+            </span>
+            <span className="mt-px block text-[11px] leading-snug text-[#475569]">
+              {sub.desc}
+            </span>
+          </span>
+        </Link>
+      </li>
+    );
+  }
+
+  function GroupCol({ group }: { group: NavGroup }) {
+    return (
+      <div>
+        <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-[#00A651]">
+          {group.label}
+        </p>
+        <ul className="flex flex-col gap-px">
+          {group.items.map((sub) => (
+            <SubItem key={sub.label + sub.href} sub={sub} />
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  return (
+    <div className="absolute left-0 top-full z-[60] pt-2.5" style={{ width: dropdownWidth }}>
+      <div
+        className="animate-menu-in rounded-2xl p-4"
+        style={{
+          backgroundColor: "#ffffff",
+          border: "1px solid rgba(0,166,81,0.08)",
+          boxShadow: "0 8px 24px rgba(15,45,36,0.10)",
+        }}
+      >
+        {/* Section label + divider */}
+        <div className="mb-3">
+          <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#00A651]">
+            {item.label}
+          </p>
+          <div className="mt-1.5 h-px bg-[#E8F5E9]" />
         </div>
 
-        <ul className="relative flex flex-col gap-0.5">
-          {item.menu.items.map((sub, i) => {
-            const active = pathname === sub.href;
-            return (
-              <li
-                key={sub.label + sub.href}
-                className="animate-menu-item"
-                style={{ animationDelay: `${i * 36 + 40}ms` }}
-              >
-                <Link
-                  href={sub.href}
-                  className={[
-                    "group/item relative flex items-center gap-3 overflow-hidden rounded-xl px-3.5 py-2.5 transition-all duration-200",
-                    active ? "ring-1 ring-light-green" : "",
-                  ].join(" ")}
-                >
-                  {/* sliding gradient highlight */}
-                  <span
-                    aria-hidden
-                    className={[
-                      "pointer-events-none absolute inset-0 bg-gradient-to-r from-light-green via-light-green/70 to-transparent transition-opacity duration-250",
-                      active ? "opacity-100" : "opacity-0 group-hover/item:opacity-100",
-                    ].join(" ")}
-                  />
-                  {/* growing accent bar */}
-                  <span
-                    aria-hidden
-                    className={[
-                      "absolute left-0 top-1/2 w-[3px] -translate-y-1/2 rounded-r-full bg-gradient-to-b from-green to-sky transition-all duration-300",
-                      active ? "h-7" : "h-0 group-hover/item:h-7",
-                    ].join(" ")}
-                  />
+        {isGrouped && item.menu.groups ? (
+          /* Capabilities — 3-column: DESIGN | OPERATE | OPTIMIZE */
+          <div className="grid grid-cols-3 gap-x-3">
+            {item.menu.groups.map((g) => (
+              <GroupCol key={g.label} group={g} />
+            ))}
+          </div>
+        ) : (
+          /* Platform / Teams / Resources — single column */
+          <ul className="flex flex-col gap-px">
+            {(item.menu.items ?? []).map((sub) => (
+              <SubItem key={sub.label + sub.href} sub={sub} />
+            ))}
+          </ul>
+        )}
 
-                  {/* icon */}
-                  <span className={[
-                    "relative grid h-8 w-8 shrink-0 place-items-center rounded-lg transition-all duration-300",
-                    active
-                      ? "bg-green text-white"
-                      : "bg-light-green/60 text-dark-green group-hover/item:bg-green group-hover/item:text-white",
-                  ].join(" ")}>
-                    <sub.icon className="h-4 w-4" />
-                  </span>
-
-                  {/* heading + description */}
-                  <span className="relative flex-1 transition-transform duration-300 group-hover/item:translate-x-0.5">
-                    <span
-                      className={[
-                        "block font-display text-[14px] font-semibold tracking-tight transition-colors duration-200",
-                        active ? "text-green" : "text-dark-green",
-                      ].join(" ")}
-                    >
-                      {sub.label}
-                    </span>
-                    <span className="mt-0.5 block text-[11.5px] leading-snug text-slate">
-                      {sub.desc}
-                    </span>
-                  </span>
-
-                  {/* trailing arrow */}
-                  <span
-                    aria-hidden
-                    className={[
-                      "relative text-green/70 transition-all duration-300",
-                      active
-                        ? "translate-x-0 opacity-100"
-                        : "-translate-x-2 opacity-0 group-hover/item:translate-x-0 group-hover/item:opacity-100",
-                    ].join(" ")}
-                  >
-                    <IconChevron className="h-3.5 w-3.5 -rotate-90" />
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* CTA footer */}
-        <div className="relative mt-1 px-3 pb-1.5 pt-2.5">
-          <span className="mb-2.5 block h-px bg-gradient-to-r from-transparent via-light-gray to-transparent" />
+        {/* Explore footer */}
+        <div className="mt-3 border-t border-[#E8F5E9] pt-2.5">
           <Link
             href={item.href}
-            className="group/cta flex items-center justify-between rounded-lg px-1 py-1 text-[12px] font-semibold text-green transition-all hover:text-dark-green"
+            className="group/cta flex w-full items-center justify-between rounded-lg px-[10px] py-1.5 text-[12px] font-semibold text-[#00A651] transition-all duration-150 hover:bg-[#E8F5E9]"
           >
             <span>Explore {item.label.toLowerCase()}</span>
-            <span className="transition-transform duration-200 group-hover/cta:translate-x-1">
-              <IconChevron className="h-3.5 w-3.5 -rotate-90" />
+            <span className="transition-transform duration-150 group-hover/cta:translate-x-[2px]">
+              <IconChevron className="h-3 w-3 -rotate-90" />
             </span>
           </Link>
         </div>
@@ -393,4 +445,3 @@ function IconChevron({ className }: { className?: string }) {
     </svg>
   );
 }
-

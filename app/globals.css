@@ -171,18 +171,20 @@
     background: linear-gradient(to right, transparent, #F1F5F9 25%, #F1F5F9 75%, transparent);
   }
 
-  /* navbar dropdown — transform only, never reduces opacity (no see-through) */
+  /* navbar dropdown — fade + slide-down entrance */
   @keyframes menu-in {
     from {
-      transform: translateY(10px) scale(0.97);
+      opacity: 0;
+      transform: translateY(-4px);
     }
     to {
-      transform: translateY(0) scale(1);
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   .animate-menu-in {
-    animation: menu-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
-    transform-origin: top left;
+    animation: menu-in 0.18s ease-out both;
+    transform-origin: top center;
   }
 
   @keyframes menu-item-in {

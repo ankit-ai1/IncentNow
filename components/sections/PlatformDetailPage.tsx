@@ -1,11 +1,8 @@
-import Link from "next/link";
+import { Button, SectionHeading } from "../ui/Primitives";
+import { Reveal, RevealGroup, RevealItem } from "../ui/Reveal";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { FinalCTA } from "./FinalCTA";
-import { PageHero } from "../ui/PageHero";
-import { Reveal, RevealGroup, RevealItem } from "../ui/Reveal";
-import { SectionHeading } from "../ui/Primitives";
-import { IconArrow } from "../ui/icons";
 import type { DetailContent } from "@/content/detail";
 
 /* ── Screenshot placeholder ──────────────────────────────────────────── */
@@ -14,9 +11,9 @@ function MockPlaceholder({ label }: { label: string }) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-light-gray bg-white shadow-float">
       <div className="flex items-center gap-1.5 border-b border-light-gray px-4 py-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-slate/20" />
-        <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#FFB703", opacity: 0.7 }} />
-        <span className="h-2.5 w-2.5 rounded-full bg-green/70" />
+        <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#E9534F", opacity: 0.65 }} />
+        <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#FFB703", opacity: 0.65 }} />
+        <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#00A651", opacity: 0.65 }} />
         <span className="ml-3 text-[11px] font-medium text-slate/60">{label}</span>
       </div>
       <div className="p-5">
@@ -40,41 +37,66 @@ function MockPlaceholder({ label }: { label: string }) {
             </div>
           ))}
         </div>
+        <div className="mt-4 space-y-2">
+          {[90, 55, 75].map((w, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div className="h-2 w-full rounded bg-light-green/50" style={{ maxWidth: `${w}%` }} />
+              <div className="h-2 w-8 shrink-0 rounded bg-green/20" />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-/* ── Detail page ─────────────────────────────────────────────────────── */
+/* ── PlatformDetailPage ──────────────────────────────────────────────── */
 
-export function DetailPage({ content }: { content: DetailContent }) {
+export function PlatformDetailPage({ content }: { content: DetailContent }) {
   const highlightsTitle = content.highlightsTitle ?? "What you get";
+  const imgLabel = content.images?.[0] ?? "Screenshot";
 
   return (
     <>
       <Navbar />
       <main>
-        <PageHero
-          eyebrow={content.eyebrow}
-          title={content.title}
-          description={content.lead}
-          primary={{ label: "Book a demo", href: "/book-demo" }}
-          secondary={{ label: content.overviewLabel, href: content.overviewHref }}
-        />
+        {/* ── Hero: text left, image placeholder right ── */}
+        <section className="mesh grain relative overflow-hidden pb-20 pt-32 sm:pb-28 sm:pt-40">
+          {/* ambient orbs */}
+          <div aria-hidden className="pointer-events-none absolute -right-20 top-8 h-80 w-80 rounded-full bg-teal opacity-40 blur-[100px]" />
+          <div aria-hidden className="pointer-events-none absolute -left-16 bottom-0 h-64 w-64 rounded-full bg-light-gray opacity-45 blur-3xl" />
+          <div aria-hidden className="pointer-events-none absolute left-1/3 top-1/4 h-48 w-48 rounded-full bg-light-green opacity-60 blur-3xl" />
 
+          <div className="shell relative">
+            <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+              {/* Left: eyebrow, heading, sub-headline, buttons */}
+              <div>
+                <span className="eyebrow">{content.eyebrow}</span>
+                <h1 className="mt-4 font-display text-display-1 font-bold text-dark-green text-balance">
+                  {content.title}
+                </h1>
+                <p className="mt-5 max-w-xl text-lead text-navy text-pretty">{content.lead}</p>
+                <div className="mt-9 flex flex-wrap items-center gap-3">
+                  <Button href="/book-demo" variant="primary">Book a demo</Button>
+                  <Button href={content.overviewHref} variant="secondary">
+                    {content.overviewLabel}
+                  </Button>
+                </div>
+              </div>
+
+              {/* Right: image/screenshot placeholder */}
+              <Reveal delay={0.1} className="hidden sm:block">
+                <MockPlaceholder label={imgLabel} />
+              </Reveal>
+            </div>
+          </div>
+
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-light-gray/60 to-transparent" />
+        </section>
+
+        {/* ── Highlights ── */}
         <section className="py-24 sm:py-32">
           <div className="shell">
-            {/* Image placeholders (only rendered when content provides them) */}
-            {content.images && content.images.length > 0 ? (
-              <Reveal>
-                <div className="mb-20 grid gap-4 sm:grid-cols-3">
-                  {content.images.map((label) => (
-                    <MockPlaceholder key={label} label={label} />
-                  ))}
-                </div>
-              </Reveal>
-            ) : null}
-
             <Reveal>
               <SectionHeading
                 eyebrow="HIGHLIGHTS"

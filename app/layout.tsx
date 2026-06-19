@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { BRAND_FAVICON_32, BRAND_FAVICON_180 } from "@/lib/config";
 
 const geist = localFont({
   src: "./fonts/Geist-Variable.woff2",
@@ -25,6 +26,11 @@ const display = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.incentnow.ai"),
+  icons: {
+    icon: BRAND_FAVICON_32,
+    shortcut: BRAND_FAVICON_32,
+    apple: BRAND_FAVICON_180,
+  },
   title: "IncentIQ — AI-First Incentive Compensation Management on ServiceNow",
   description:
     "IncentIQ transforms sales incentives into transparent, intelligent, and automated workflows. An AI-first Incentive Compensation Management platform built natively on ServiceNow for enterprise scale.",

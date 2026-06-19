@@ -10,7 +10,10 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const content = getDetail("capabilities", params.slug);
   if (!content) return {};
-  const name = params.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const name = content.eyebrow
+    .split(" ")
+    .map((w) => (w === "&" ? "&" : w.charAt(0) + w.slice(1).toLowerCase()))
+    .join(" ");
   return { title: `${name} — IncentIQ`, description: content.lead };
 }
 

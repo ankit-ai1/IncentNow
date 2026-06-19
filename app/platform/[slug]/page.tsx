@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { DetailPage } from "@/components/sections/DetailPage";
+import { PlatformDetailPage } from "@/components/sections/PlatformDetailPage";
 import { getDetail, slugsFor } from "@/content/detail";
 
 export function generateStaticParams() {
@@ -17,5 +17,5 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 export default function Page({ params }: { params: { slug: string } }) {
   const content = getDetail("platform", params.slug);
   if (!content) notFound();
-  return <DetailPage content={content} />;
+  return <PlatformDetailPage content={content} />;
 }
