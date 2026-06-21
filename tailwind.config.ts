@@ -78,6 +78,10 @@ const config: Config = {
           "70%":  { transform: "translateX(230%) skewX(-10deg)", opacity: "0" },
           "100%": { transform: "translateX(-160%) skewX(-10deg)", opacity: "0" },
         },
+        "chevron-pulse": {
+          "0%, 100%": { opacity: "0.3", filter: "drop-shadow(0 0 0px rgba(0,166,81,0))" },
+          "50%":       { opacity: "1",   filter: "drop-shadow(0 0 8px rgba(0,166,81,0.9))" },
+        },
       },
       animation: {
         "flow-dash":    "flow-dash 1.6s linear infinite",
@@ -87,7 +91,8 @@ const config: Config = {
         orbit:          "orbit 26s linear infinite",
         marquee:        "marquee 32s linear infinite",
         "arrow-travel": "arrow-travel 1.8s cubic-bezier(0.4,0,0.6,1) infinite",
-        "sheen-loop":   "sheen-loop 4.5s ease-in-out infinite",
+        "sheen-loop":     "sheen-loop 4.5s ease-in-out infinite",
+        "chevron-pulse":  "chevron-pulse 1.2s ease-in-out infinite",
       },
     },
   },

@@ -1,6 +1,4 @@
 "use client";
-
-import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionHeading } from "../ui/Primitives";
 import { RevealGroup, RevealItem } from "../ui/Reveal";
@@ -43,22 +41,27 @@ const fadeScale = {
   visible: { opacity: 1, scale: 1,   transition: { duration: 0.3, ease: "easeOut" } },
 };
 
-// ── Horizontal animated connector (desktop) ───────────────────────────────
-function ConnectorH({ hovered }: { hovered: boolean }) {
+// ── 4-chevron animated connector (desktop) ───────────────────────────────
+function ChevronConnector() {
   return (
-    <div aria-hidden className="relative mx-auto h-5 w-14">
-      <svg viewBox="0 0 56 18" fill="none" className="absolute inset-0 h-full w-full">
-        <line x1="3" y1="9" x2="42" y2="9" stroke="#C8E6C9" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M37 5L47 9L37 13" stroke="#00A651" strokeWidth="2"
-          strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      {/* Traveling glow dot — CSS speed overridden inline on hover */}
-      <div className="absolute inset-0 flex items-center">
-        <span
-          className="h-[6px] w-[6px] rounded-full bg-green shadow-[0_0_6px_rgba(0,166,81,0.85)] motion-safe:animate-arrow-travel motion-reduce:hidden"
-          style={hovered ? { animationDuration: "0.75s" } : undefined}
-        />
-      </div>
+    <div aria-hidden className="flex items-center justify-center gap-[3px]">
+      {[0, 1, 2, 3].map((i) => (
+        <svg
+          key={i}
+          viewBox="0 0 10 16"
+          fill="none"
+          style={{ width: 10, height: 16, animationDelay: `${i * 200}ms` }}
+          className="motion-safe:animate-chevron-pulse motion-reduce:opacity-40"
+        >
+          <path
+            d="M2 2L8 8L2 14"
+            stroke="#00A651"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ))}
     </div>
   );
 }
@@ -86,51 +89,49 @@ interface PairProps {
 }
 
 function PairRow({ problem, shift, featured = false, problemNode, sheenDelay }: PairProps) {
-  const [hovered, setHovered] = useState(false);
   const pad = featured ? "px-7 py-7 sm:px-8 sm:py-8" : "px-5 py-[1.05rem] sm:px-6";
 
   return (
     <motion.div
       variants={rowVariants}
       className="group grid w-full items-stretch gap-x-3 lg:grid-cols-[minmax(0,1fr)_3.5rem_minmax(0,1fr)]"
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
     >
       {/* ── Problem card ─────────────────────────────────────────────── */}
       <motion.div variants={fromLeft} className="min-w-0 h-full">
         <div
           className={[
             "relative overflow-hidden rounded-2xl h-full",
-            "ring-1 ring-[#dbd7d3]",
-            "bg-gradient-to-br from-[#f0edeb] to-[#f4f4f5]",
+            "bg-white",
+            "ring-1 ring-[rgba(220,38,38,0.20)]",
+            "shadow-[0_4px_24px_rgba(220,38,38,0.09)]",
             "transition-all duration-300",
-            "group-hover:-translate-y-0.5 group-hover:shadow-[0_6px_18px_rgba(80,65,55,0.07)] group-hover:ring-[#b8ada4]",
+            "group-hover:-translate-y-0.5 group-hover:shadow-[0_12px_48px_rgba(220,38,38,0.18)]",
             pad,
           ].join(" ")}
-          style={{ borderLeft: "2px solid #ccc5bc" }}
+          style={{ borderLeft: "3px solid #E63946" }}
         >
           {featured ? (
             <div className="flex items-start gap-3">
-              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e8e3de] ring-1 ring-[#d4ccc5]">
+              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[rgba(230,57,70,0.10)]">
                 <svg viewBox="0 0 10 10" fill="none" className="h-2.5 w-2.5" aria-hidden>
-                  <path d="M3 3L7 7M7 3L3 7" stroke="#9e8e83" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M3 3L7 7M7 3L3 7" stroke="#E63946" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </div>
-              <p className="text-[15px] leading-relaxed text-[#5c5250]">
+              <p className="text-[15px] leading-relaxed text-[#0B1D2D]">
                 {problemNode ?? problem}
               </p>
             </div>
           ) : (
             <div className="flex items-center gap-3">
               {/* Muted ×-icon in warm-gray pill */}
-              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e8e3de] ring-1 ring-[#d4ccc5] transition-colors duration-300 group-hover:bg-[#dfd8d1]">
+              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[rgba(230,57,70,0.10)] transition-colors duration-300 group-hover:bg-[rgba(230,57,70,0.18)]">
                 <svg viewBox="0 0 10 10" fill="none" className="h-2.5 w-2.5" aria-hidden>
-                  <path d="M3 3L7 7M7 3L3 7" stroke="#9e8e83" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M3 3L7 7M7 3L3 7" stroke="#E63946" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </div>
               {/* Text + hover strikethrough */}
               <div className="relative min-w-0">
-                <p className="text-[13.5px] font-medium leading-snug text-[#5a5050]">{problem}</p>
+                <p className="text-[13.5px] font-medium leading-snug text-[#0B1D2D]">{problem}</p>
                 <div
                   aria-hidden
                   className="absolute left-0 top-1/2 h-px w-0 -translate-y-1/2 rounded-full bg-[#b0a59e] motion-safe:transition-[width] motion-safe:duration-500 motion-safe:group-hover:w-full"
@@ -143,7 +144,7 @@ function PairRow({ problem, shift, featured = false, problemNode, sheenDelay }: 
 
       {/* ── Connector ────────────────────────────────────────────────── */}
       <motion.div variants={fadeScale} className="flex items-center justify-center">
-        <div className="hidden lg:block"><ConnectorH hovered={hovered} /></div>
+        <div className="hidden lg:block"><ChevronConnector /></div>
         <div className="py-0.5 lg:hidden"><ConnectorV /></div>
       </motion.div>
 
@@ -281,8 +282,8 @@ export function Problem() {
                 transition={{ duration: 0.4 }}
               >
                 <div>
-                  <p className="eyebrow text-slate/40">THE PROBLEM</p>
-                  <div className="mt-2 h-[2px] w-7 rounded-full bg-slate/20" />
+                  <p className="eyebrow" style={{ color: "#E63946" }}>THE PROBLEM</p>
+                  <div className="mt-2 h-[2px] w-7 rounded-full bg-[#E63946]/40" />
                 </div>
                 <div />
                 <div>
