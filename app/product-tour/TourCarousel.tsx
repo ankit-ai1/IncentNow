@@ -161,11 +161,8 @@ const TABS: TabData[] = [
       { icon: IconForecast,   title: "Executive Analytics", body: "Monitor attainment, payouts, and compensation trends at the leadership level." },
       { icon: IconGovernance, title: "Custom Reports",      body: "Create reports tailored to your business and leadership needs." },
     ],
-    // No dedicated Reports screenshots in v1 — using dashboard views as stand-ins.
-    // Swap for dedicated Reports screenshots (e.g. 99_reports-placeholder.png) when available.
     slides: [
       { file: "31_dashboard-in-case-you-want-to-use-this.png",caption: "Build and explore reports and analytics across incentive performance, compensation spend, and effectiveness." },
-      { file: "32_dashboard-in-case-you-want-to-use-this.png",caption: "Turn compensation data into strategic insights with customizable report views." },
     ],
   },
   {

@@ -21,11 +21,11 @@ export function Hero() {
           </div>
 
           <h1
-            className="mt-8 font-display font-bold text-dark-green"
-            style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)", lineHeight: "0.96", letterSpacing: "-0.04em" }}
+            className="mt-8 font-display font-bold text-dark-green leading-[1.08] sm:leading-[0.96]"
+            style={{ fontSize: "clamp(2rem, 5.5vw, 4.5rem)", letterSpacing: "-0.04em" }}
           >
             Incentive<br />
-            <span className="whitespace-nowrap">Compensation, Reimagined</span><br />
+            <span className="sm:whitespace-nowrap">Compensation, Reimagined</span><br />
             for the <span className="text-gradient">AI Era.</span>
           </h1>
 
