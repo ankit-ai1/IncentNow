@@ -111,12 +111,14 @@ export function Footer() {
         <div className="divider-x mt-10" />
         <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-col items-start gap-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://res.cloudinary.com/dtg3lepr4/image/upload/v1782126788/Ctrl_Alt_Now_snnxbi.png"
-              alt="CtrlAltNow"
-              style={{ height: "24px", width: "auto", objectFit: "contain", objectPosition: "left", mixBlendMode: "multiply", display: "block" }}
-            />
+            <a href="https://ctrlaltnow.com/" target="_blank" rel="noopener noreferrer">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://res.cloudinary.com/dtg3lepr4/image/upload/v1782126788/Ctrl_Alt_Now_snnxbi.png"
+                alt="CtrlAltNow"
+                style={{ height: "48px", width: "auto", objectFit: "contain", objectPosition: "left", mixBlendMode: "multiply", display: "block" }}
+              />
+            </a>
             <p className="text-[11.5px] text-slate">
               © {new Date().getFullYear()} CtrlAltNow Solution Inc. All rights reserved.
             </p>
