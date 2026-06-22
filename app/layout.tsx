@@ -25,7 +25,7 @@ const display = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.incentnow.ai"),
+  metadataBase: new URL("https://www.incentiq.ai"),
   icons: {
     icon: BRAND_FAVICON_32,
     shortcut: BRAND_FAVICON_32,
@@ -139,6 +139,18 @@ export default function RootLayout({
       </head>
       <body className="bg-white font-sans text-dark-green antialiased">
         {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "IncentIQ",
+              "url": "https://www.incentiq.ai",
+              "logo": "https://www.incentiq.ai/favicon-180.png"
+            })
+          }}
+        />
       </body>
     </html>
   );
