@@ -61,7 +61,7 @@ export function Footer() {
 
             <div className="mt-4 flex items-center gap-2">
               <a
-                href="https://www.linkedin.com/company/incentnow"
+                href="https://www.linkedin.com/company/ctrlaltnow/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -109,25 +109,23 @@ export function Footer() {
 
         {/* bottom bar */}
         <div className="divider-x mt-10" />
-        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2 mb-2">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://res.cloudinary.com/dtg3lepr4/image/upload/v1782123835/WhatsApp_Image_2026-06-22_at_3.51.58_PM_gqqats.jpg"
-                alt="CtrlAltNow"
-                style={{ height: "28px", width: "auto", objectFit: "contain" }}
-              />
-            </div>
+        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col items-start gap-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://res.cloudinary.com/dtg3lepr4/image/upload/v1782126788/Ctrl_Alt_Now_snnxbi.png"
+              alt="CtrlAltNow"
+              style={{ height: "24px", width: "auto", objectFit: "contain", objectPosition: "left", mixBlendMode: "multiply", display: "block" }}
+            />
             <p className="text-[11.5px] text-slate">
-              © {new Date().getFullYear()} CtrlAltNow Solutions Pvt Ltd. All rights reserved.
+              © {new Date().getFullYear()} CtrlAltNow Solution Inc. All rights reserved.
             </p>
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <div className="flex items-center gap-5">
-              <Link href="#" className="text-[11.5px] text-slate hover:text-dark-green">Privacy</Link>
-              <Link href="#" className="text-[11.5px] text-slate hover:text-dark-green">Terms</Link>
-              <Link href="#" className="text-[11.5px] text-slate hover:text-dark-green">Security</Link>
+          <div className="flex flex-col items-start gap-2 sm:items-end">
+            <div className="flex flex-wrap items-center gap-5">
+              <Link href="/privacy" className="text-[11.5px] text-slate hover:text-dark-green">Privacy</Link>
+              <Link href="/terms" className="text-[11.5px] text-slate hover:text-dark-green">Terms</Link>
+              <Link href="/security" className="text-[11.5px] text-slate hover:text-dark-green">Security</Link>
             </div>
             <p className="text-[10px] text-slate/50">
               Website developed by{" "}

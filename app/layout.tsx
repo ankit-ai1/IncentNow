@@ -53,6 +53,74 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "IncentIQ",
+    "alternateName": "CtrlAltNow",
+    "url": "https://incentiq.ai",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CtrlAltNow Solution Inc.",
+      "url": "https://incentiq.ai",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://incentiq.ai/brand/incentiq-logo.svg"
+      }
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://incentiq.ai/?s={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CtrlAltNow",
+    "alternateName": "IncentIQ",
+    "url": "https://incentiq.ai",
+    "sameAs": [
+      "https://www.linkedin.com/company/ctrlaltnow/"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "IncentIQ Site Navigation",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Platform",
+        "url": "https://incentiq.ai/platform"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Capabilities",
+        "url": "https://incentiq.ai/capabilities"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Product Tour",
+        "url": "https://incentiq.ai/product-tour"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Contact Us",
+        "url": "https://incentiq.ai/book-demo"
+      }
+    ]
+  }
+];
+
 export default function RootLayout({
   children,
 }: {
@@ -63,6 +131,12 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} ${inter.variable} ${display.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="bg-white font-sans text-dark-green antialiased">
         {children}
       </body>
