@@ -69,7 +69,7 @@ const capGroups = [
     items: [
       { label: "Calculations", href: "/capabilities/calculations" },
       { label: "Statements",   href: "/capabilities/statements" },
-      { label: "Disputes",     href: "/capabilities/dispute-resolution" },
+      { label: "Data Import",   href: "/capabilities/data-import" },
     ],
   },
   {

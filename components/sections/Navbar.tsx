@@ -7,7 +7,7 @@ import { Button } from "../ui/Primitives";
 import { LogoMark } from "../ui/Logo";
 import {
   IconWorkflow, IconScale, IconSpark, IconData,
-  IconQuota, IconPlan, IconPerformance, IconStatement, IconDispute, IconAssistant,
+  IconQuota, IconPlan, IconPerformance, IconStatement, IconAssistant,
   IconVisibility, IconGovernance, IconArrow, IconOrg,
   type IconProps,
 } from "../ui/icons";
@@ -70,7 +70,7 @@ const nav: NavItem[] = [
           items: [
             { icon: IconScale, label: "Calculations", desc: "Automated & traceable processing", href: "/capabilities/calculations" },
             { icon: IconStatement, label: "Statements", desc: "Clear, itemised payouts", href: "/capabilities/statements" },
-            { icon: IconDispute, label: "Disputes", desc: "Governed investigation flow", href: "/capabilities/dispute-resolution" },
+            { icon: IconData, label: "Data Import", desc: "Structured data ingestion", href: "/capabilities/data-import" },
           ],
         },
         {

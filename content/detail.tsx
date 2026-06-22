@@ -7,6 +7,7 @@ import {
   type IconProps,
 } from "@/components/ui/icons";
 import { ServiceNowLogo } from "@/components/ui/ServiceNowLogo";
+import type { CarouselSlide } from "@/components/ui/SlideCarousel";
 
 export type Group = "platform" | "capabilities" | "solutions" | "resources";
 
@@ -22,6 +23,7 @@ export type DetailContent = {
   overviewLabel: string;
   highlightsTitle?: string;
   images?: string[];
+  slides?: CarouselSlide[];
 };
 
 const groupOverview: Record<Group, { href: string; label: string }> = {
@@ -41,6 +43,7 @@ function make(
   points: string[],
   highlightsTitle?: string,
   images?: string[],
+  slides?: CarouselSlide[],
 ): DetailContent {
   return {
     group,
@@ -54,6 +57,7 @@ function make(
     overviewLabel: groupOverview[group].label,
     highlightsTitle,
     images,
+    slides,
   };
 }
 
@@ -139,6 +143,14 @@ const capabilities: DetailContent[] = [
     [],
     undefined,
     ["Hierarchy View", "Territory Map", "Participant Assignment"],
+    [
+      { file: "10_organization.png",                              caption: "Open the Organization workspace to model your incentive structure." },
+      { file: "11_organization-add-business-unit.png",            caption: "Add business units to create your organizational structure." },
+      { file: "12_organization-add-team-member.png",              caption: "Add team members and assign them to business units." },
+      { file: "13_organization-view-business-unit-hierarchy.png", caption: "Visualize the full business unit hierarchy at a glance." },
+      { file: "14_organization-view-team-hierarchy.png",          caption: "Review the team hierarchy and reporting relationships." },
+      { file: "15_organization-view-team-directory.png",          caption: "Browse the complete team directory of all participants." },
+    ],
   ),
   make(
     "capabilities",
@@ -154,6 +166,13 @@ const capabilities: DetailContent[] = [
     [],
     undefined,
     ["Quota Allocation", "Distribution Summary", "Attainment Tracker"],
+    [
+      { file: "16_quota-list.png",               caption: "See all quotas across your organization in one list view." },
+      { file: "17_quota-create-quota.png",       caption: "Create a new quota and define its targets." },
+      { file: "18_quota-quota-distribution.png", caption: "Adjust quota distribution across fiscal periods." },
+      { file: "19_quota-quota-approval.png",     caption: "Route the quota through the approval workflow." },
+      { file: "20_quota-quota-assignment.png",   caption: "Assign approved quotas to teams and individuals." },
+    ],
   ),
   make(
     "capabilities",
@@ -169,6 +188,14 @@ const capabilities: DetailContent[] = [
     [],
     undefined,
     ["Plan Builder", "Rules Engine", "Deployment Log"],
+    [
+      { file: "21_incentive-plans-plan-list.png",       caption: "View all incentive plans in a single list." },
+      { file: "22_incentive-plans-create-plan.png",     caption: "Create a plan and add its basic information." },
+      { file: "23_incentive-plans-create-plan.png",     caption: "Define earning rules that determine how participants earn." },
+      { file: "24_incentive-plans-create-plan.png",     caption: "Configure commission rules and calculation logic." },
+      { file: "25_incentive-plans-plan-approval.png",   caption: "Send the plan through its approval workflow." },
+      { file: "26_incentive-plans-plan-assignment.png", caption: "Assign the approved plan to the relevant participants." },
+    ],
   ),
   make(
     "capabilities",
@@ -184,6 +211,11 @@ const capabilities: DetailContent[] = [
     [],
     undefined,
     ["Calculation Run", "Trace View", "Processing Summary"],
+    [
+      { file: "06_import-data-create-data-model.png", caption: "Create a data model that defines the structure of your data." },
+      { file: "07_import-data-upload-csv.png",        caption: "Upload source data and begin the calculation process." },
+      { file: "08_import-data-preview-records.png",   caption: "Preview and validate records before processing." },
+    ],
   ),
   make(
     "capabilities",
@@ -199,21 +231,33 @@ const capabilities: DetailContent[] = [
     [],
     undefined,
     ["Statement Preview", "Earnings Detail", "Self-Service Portal"],
+    [
+      { file: "27_statement-incentive-statement-list.png",   caption: "Generate and view the list of incentive statements." },
+      { file: "28_statement-incentive-statement-detail.png", caption: "Open a detailed statement to review earnings and payouts." },
+    ],
   ),
   make(
     "capabilities",
-    "dispute-resolution",
-    "DISPUTE RESOLUTION",
-    <>Resolve compensation questions <span className="text-gradient">faster.</span></>,
-    "Manage disputes, exceptions, and inquiries through a structured workflow that improves accountability and reduces operational effort.",
+    "data-import",
+    "DATA IMPORT",
+    <>Connect and ingest your data <span className="text-gradient">with confidence.</span></>,
+    "Import data from your CRM and enterprise systems into IncentIQ through a structured, governed data ingestion workflow.",
     [
-      { icon: IconWorkflow, title: "Structured Workflows", body: "Route disputes through governed review and approval processes." },
-      { icon: IconStatement, title: "Full Context", body: "Access calculations, statements, and supporting data in one place." },
-      { icon: IconGovernance, title: "Audit Trail", body: "Maintain complete visibility into every dispute and resolution." },
+      { icon: IconData, title: "Flexible Data Models", body: "Define custom data structures that match your organization's source data schema." },
+      { icon: IconWorkflow, title: "Metadata Mapping", body: "Map incoming fields to IncentIQ's data model for accurate, reliable processing." },
+      { icon: IconGovernance, title: "Governed Ingestion", body: "Validate, preview, and commit data imports with full traceability and control." },
     ],
     [],
     undefined,
-    ["Dispute Intake", "Review Workflow", "Resolution Log"],
+    ["Data Model", "Field Mapping", "Import Preview"],
+    [
+      { file: "01_admin.png",                         caption: "Start in the Admin workspace to configure your environment." },
+      { file: "05_look-up-tables.png",                caption: "Set up look-up tables to standardize incoming data values." },
+      { file: "06_import-data-create-data-model.png", caption: "Create a data model that defines your import structure." },
+      { file: "07_import-data-upload-csv.png",        caption: "Upload your source data via CSV from your CRM." },
+      { file: "08_import-data-preview-records.png",   caption: "Preview imported records to verify data before committing." },
+      { file: "09_import-data-metadata-mapping.png",  caption: "Map metadata fields to IncentIQ's data model." },
+    ],
   ),
   make(
     "capabilities",
@@ -229,6 +273,10 @@ const capabilities: DetailContent[] = [
     [],
     undefined,
     ["Attainment Dashboard", "Team Performance", "Rep Drill-Down"],
+    [
+      { file: "29_performance-tracking.png",             caption: "Monitor attainment and incentive performance as it happens." },
+      { file: "30_performance-tracking-more-graphs.png", caption: "Drill into additional graphs for deeper performance insight." },
+    ],
   ),
   make(
     "capabilities",
@@ -244,6 +292,10 @@ const capabilities: DetailContent[] = [
     [],
     undefined,
     ["Executive Dashboard", "Operational Report", "Custom Analytics"],
+    [
+      { file: "35_reports.png",                                    caption: "Build and explore reports across incentive performance and compensation spend." },
+      { file: "31_dashboard-in-case-you-want-to-use-this.png",     caption: "Monitor attainment, payouts, and compensation trends." },
+    ],
   ),
   make(
     "capabilities",
@@ -259,6 +311,10 @@ const capabilities: DetailContent[] = [
     [],
     undefined,
     ["Natural Language Query", "AI Explanation", "Predictive Forecast"],
+    [
+      { file: "33_ai-assistant.png", caption: "Ask questions about quotas, earnings, and performance in natural language." },
+      { file: "34_ai-assistant.png", caption: "Get instant intelligent explanations across the incentive lifecycle." },
+    ],
   ),
 ];
 
