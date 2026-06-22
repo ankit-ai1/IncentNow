@@ -1,10 +1,7 @@
 User-agent: *
 Allow: /
 
-# Block admin and internal paths
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/
 
-# Sitemap
 Sitemap: https://incentiq.ai/sitemap.xml
