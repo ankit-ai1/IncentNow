@@ -41,10 +41,7 @@ function SlideImage({ file, caption }: { file: string; caption: string }) {
       style={{
         width: "100%",
         height: "auto",
-        maxHeight: "52vh",
-        objectFit: "contain",
         display: "block",
-        margin: "0 auto",
       }}
       onError={() => setFailed(true)}
     />
@@ -186,7 +183,7 @@ export function SlideCarousel({ slides, slug }: { slides: CarouselSlide[]; slug?
     <div style={{ isolation: "isolate", contain: "layout style paint" }}>
       {/* Browser chrome frame */}
       <div
-        className="w-full rounded-2xl border border-light-gray bg-white shadow-[0_8px_32px_rgba(15,45,36,0.12),0_2px_8px_rgba(15,45,36,0.06)]"
+        className="mx-auto w-full max-w-4xl rounded-2xl border border-light-gray bg-white shadow-[0_8px_32px_rgba(15,45,36,0.12),0_2px_8px_rgba(15,45,36,0.06)]"
       >
         {/* Chrome bar */}
         <div className="shrink-0 overflow-hidden rounded-t-2xl">
