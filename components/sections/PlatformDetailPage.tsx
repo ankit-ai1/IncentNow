@@ -1,5 +1,5 @@
 import { Button, SectionHeading } from "../ui/Primitives";
-import { Reveal, RevealGroup, RevealItem } from "../ui/Reveal";
+import { Reveal, FadeIn, FloatingGlow } from "../ui/Reveal";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { FinalCTA } from "./FinalCTA";
@@ -78,23 +78,31 @@ export function PlatformDetailPage({ content }: { content: DetailContent }) {
             <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
               {/* Left: eyebrow, heading, sub-headline, buttons */}
               <div>
-                <span className="eyebrow">{content.eyebrow}</span>
-                <h1 className="mt-4 font-display text-display-1 font-bold text-dark-green text-balance">
-                  {content.title}
-                </h1>
-                <p className="mt-5 max-w-xl text-lead text-navy text-pretty">{content.lead}</p>
-                <div className="mt-9 flex flex-wrap items-center gap-3">
-                  <Button href="/book-demo" variant="primary">Book a demo</Button>
-                  <Button href={content.overviewHref} variant="secondary">
-                    {content.overviewLabel}
-                  </Button>
-                </div>
+                <FadeIn direction="top" delay={0}>
+                  <span className="eyebrow">{content.eyebrow}</span>
+                </FadeIn>
+                <FadeIn direction="left" delay={0.1}>
+                  <h1 className="mt-4 font-display text-display-1 font-bold text-dark-green text-balance">
+                    {content.title}
+                  </h1>
+                </FadeIn>
+                <FadeIn direction="left" delay={0.2}>
+                  <p className="mt-5 max-w-xl text-lead text-navy text-pretty">{content.lead}</p>
+                </FadeIn>
+                <FadeIn direction="bottom" delay={0.3}>
+                  <div className="mt-9 flex flex-wrap items-center gap-3">
+                    <Button href="/book-demo" variant="primary">Book a demo</Button>
+                    <Button href={content.overviewHref} variant="secondary">
+                      {content.overviewLabel}
+                    </Button>
+                  </div>
+                </FadeIn>
               </div>
 
-              {/* Right: image/screenshot placeholder */}
-              <Reveal delay={0.1} className="hidden sm:block">
+              {/* Right: image/screenshot placeholder — fades in, then floats gently with a pulsing glow */}
+              <FloatingGlow className="hidden sm:block rounded-2xl">
                 <MockPlaceholder label={imgLabel} src={screenshotSrc} />
-              </Reveal>
+              </FloatingGlow>
             </div>
           </div>
 
@@ -112,13 +120,13 @@ export function PlatformDetailPage({ content }: { content: DetailContent }) {
               />
             </Reveal>
 
-            <RevealGroup className="mt-8 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {content.highlights.map((h) => {
+            <div className="mt-8 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {content.highlights.map((h, i) => {
                 const Icon = h.icon;
                 return (
-                  <RevealItem key={h.title}>
+                  <Reveal key={h.title} delay={i * 0.15}>
                     <article
-                      className="group/card relative flex h-full flex-col overflow-hidden rounded-2xl border border-[rgba(0,166,81,0.12)] shadow-[0_4px_16px_rgba(15,45,36,0.07),0_1px_3px_rgba(15,45,36,0.05)] transition-all duration-[250ms] ease-out hover:-translate-y-[3px] hover:border-[rgba(0,166,81,0.28)] hover:shadow-[0_8px_28px_rgba(15,45,36,0.10)]"
+                      className="group/card relative flex h-full flex-col overflow-hidden rounded-2xl border border-[rgba(0,166,81,0.12)] shadow-[0_4px_16px_rgba(15,45,36,0.07),0_1px_3px_rgba(15,45,36,0.05)] transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:border-[rgba(0,166,81,0.28)] hover:shadow-[0_12px_32px_rgba(15,45,36,0.14)]"
                       style={{ background: "linear-gradient(to bottom, #ffffff, rgba(232,245,233,0.40))" }}
                     >
                       <div className="h-[3px] w-full bg-[#00A651]" aria-hidden />
@@ -130,10 +138,10 @@ export function PlatformDetailPage({ content }: { content: DetailContent }) {
                         <p className="mt-2 flex-1 text-[13.5px] leading-[1.6] text-[#475569]">{h.body}</p>
                       </div>
                     </article>
-                  </RevealItem>
+                  </Reveal>
                 );
               })}
-            </RevealGroup>
+            </div>
           </div>
         </section>
 

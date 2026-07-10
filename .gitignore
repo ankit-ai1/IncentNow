@@ -12,8 +12,16 @@ npm-debug.log*
 .env*.local
 *.env
 
-# Database
+# Database / Schema
 *.sql
 *.schema.sql
+prisma/schema.prisma
+prisma/seed.ts
+
+# Supabase
+supabase/
+
+# Docs
+README.md
 
 next-env.d.ts

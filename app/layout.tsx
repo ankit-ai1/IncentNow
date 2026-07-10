@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import Script from "next/script";
 import localFont from "next/font/local";
 import "./globals.css";
 import { BRAND_FAVICON_32, BRAND_FAVICON_180 } from "@/lib/config";
@@ -132,6 +133,16 @@ export default function RootLayout({
       className={`${geist.variable} ${inter.variable} ${display.variable}`}
     >
       <head>
+        <meta name="google-site-verification" content="VK67hmN88wgLRUebyErf8YsyL1Rn9JqCC8hyjm6eh9Q" />
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-K950D02PDX" strategy="afterInteractive" />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-K950D02PDX');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

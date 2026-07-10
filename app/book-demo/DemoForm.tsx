@@ -82,6 +82,21 @@ export function DemoForm() {
         }),
       });
       if (!res.ok) throw new Error("Failed");
+
+      fetch("/api/send-demo-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          company: data.company,
+          jobTitle: data.title,
+          companySize: data.teamSize,
+          message: data.message,
+        }),
+      }).catch(() => {});
+
       setSubmitted(true);
     } catch {
       setErrors({ submit: "Something went wrong. Please try again." });
