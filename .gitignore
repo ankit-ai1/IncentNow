@@ -25,3 +25,5 @@ supabase/
 README.md
 
 next-env.d.ts
+
+.vercel
