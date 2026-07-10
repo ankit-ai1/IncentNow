@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const name = [firstName, lastName].filter(Boolean).join(" ");
 
   await resend.emails.send({
-    from: "IncentIQ <onboarding@resend.dev>",
+    from: "IncentIQ <noreply@incentiq.ai>",
     to: "sreekanth.lapala@incentiq.ai",
     subject: `New Demo Request from ${name} — ${company}`,
     html: `
