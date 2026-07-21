@@ -33,6 +33,19 @@ function formatDate(date: Date | string | null): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
+function highlightTitle(title: string) {
+  const words = title.trim().split(" ");
+  if (words.length <= 2) return title;
+  const lead = words.slice(0, -2).join(" ");
+  const tail = words.slice(-2).join(" ");
+  return (
+    <>
+      {lead}{" "}
+      <span className="text-gradient">{tail}</span>
+    </>
+  );
+}
+
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const { data: post } = await supabasePublic
     .from("posts")
@@ -87,7 +100,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 )}
               </div>
 
-              <h1 className="mt-5 font-display text-display-1 font-bold text-dark-green text-balance">{post.title}</h1>
+              <h1 className="mt-5 font-display text-display-1 font-bold text-dark-green text-balance">{highlightTitle(post.title)}</h1>
               {post.excerpt && (
                 <p className="mt-5 text-lead text-navy text-pretty">{post.excerpt}</p>
               )}
