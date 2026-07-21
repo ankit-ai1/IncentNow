@@ -115,7 +115,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             <div className="mx-auto max-w-3xl">
               <Reveal>
                 <div
-                  className="prose prose-lg max-w-none text-navy [&_h2]:font-display [&_h2]:text-display-3 [&_h2]:font-bold [&_h2]:text-dark-green [&_h2]:mb-4 [&_h2]:mt-10 [&_p]:mt-4 [&_p]:text-[16.5px] [&_p]:leading-[1.75]"
+                  className="prose prose-lg max-w-none text-navy [&_h2]:font-display [&_h2]:text-display-3 [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-dark-green [&_h2]:mb-4 [&_h2]:mt-12 [&_h3]:font-display [&_h3]:text-[1.35rem] [&_h3]:font-bold [&_h3]:tracking-tight [&_h3]:text-dark-green [&_h3]:mb-3 [&_h3]:mt-8 [&_p]:mt-4 [&_p]:text-[16.5px] [&_p]:leading-[1.75] [&>*:first-child]:mt-0"
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </Reveal>
