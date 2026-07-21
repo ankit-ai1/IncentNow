@@ -11,6 +11,8 @@ import { supabasePublic } from "@/lib/supabase";
 import { ServiceNowLogo } from "@/components/ui/ServiceNowLogo";
 import { TableOfContents, type TocHeading } from "@/components/blog/TableOfContents";
 
+export const revalidate = 60;
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const { data: post } = await supabasePublic
     .from("posts")
