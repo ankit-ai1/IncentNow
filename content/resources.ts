@@ -24,40 +24,22 @@ export type AnalystInsight = {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "rethinking-incentive-compensation-ai",
-    title: "Rethinking Incentive Compensation in the Age of AI",
+    slug: "what-is-incentive-compensation-management",
+    title: "What Is Incentive Compensation Management? A Complete Guide for RevOps Leaders",
     excerpt:
-      "How AI-powered intelligence is transforming the way organizations design, administer, and optimize sales compensation programs.",
-    date: "June 10, 2025",
-    readTime: "6 min read",
-    tag: "AI & Analytics",
+      "A complete guide to Incentive Compensation Management for RevOps leaders — what it means, why spreadsheets and CRMs break down at scale, and what a modern ICM platform needs to deliver.",
+    date: "July 21, 2026",
+    readTime: "3 min read",
+    tag: "ICM Best Practices",
   },
   {
-    slug: "why-spreadsheets-break-at-scale",
-    title: "Why Spreadsheets Break at Enterprise Scale",
+    slug: "how-does-sales-commission-software-work",
+    title: "How Does Sales Commission Software Actually Work? A Step-by-Step Breakdown",
     excerpt:
-      "The hidden costs of managing incentive compensation outside a governed platform — and what organizations lose when data lives in silos.",
-    date: "May 22, 2025",
-    readTime: "5 min read",
-    tag: "Incentive Ops",
-  },
-  {
-    slug: "designing-plans-reps-trust",
-    title: "Designing Plans Your Reps Actually Trust",
-    excerpt:
-      "Transparency and traceability in compensation statements aren't just compliance checkboxes — they're drivers of rep motivation and retention.",
-    date: "May 8, 2025",
-    readTime: "7 min read",
-    tag: "Plan Design",
-  },
-  {
-    slug: "governance-gap-incentive-compensation",
-    title: "The Governance Gap in Incentive Compensation",
-    excerpt:
-      "Finance teams need auditability and version control. Sales ops needs speed. Here's how modern ICM platforms bridge both.",
-    date: "April 24, 2025",
-    readTime: "5 min read",
-    tag: "Governance",
+      "A step-by-step breakdown of how sales commission software works — from data ingestion and plan rules to calculation, payout statements, and dispute handling.",
+    date: "July 21, 2026",
+    readTime: "3 min read",
+    tag: "How-To",
   },
 ];
 
