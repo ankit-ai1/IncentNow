@@ -133,14 +133,14 @@ export default function RootLayout({
       className={`${geist.variable} ${inter.variable} ${display.variable}`}
     >
       <head>
-        <meta name="google-site-verification" content="VK67hmN88wgLRUebyErf8YsyL1Rn9JqCC8hyjm6eh9Q" />
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-K950D02PDX" strategy="afterInteractive" />
+        <meta name="google-site-verification" content="Fhiwfso6OK6ajOLg-DeF5qtlO4jJwDX_7idqs2S4YWA" />
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-VYE0MEEWVQ" strategy="afterInteractive" />
         <Script id="ga4-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-K950D02PDX');
+            gtag('config', 'G-VYE0MEEWVQ');
           `}
         </Script>
         <script
