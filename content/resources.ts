@@ -41,6 +41,15 @@ export const blogPosts: BlogPost[] = [
     readTime: "3 min read",
     tag: "How-To",
   },
+  {
+    slug: "icm-vs-crm-why-your-crm-cant-replace-a-dedicated-compensation-platform",
+    title: "ICM vs CRM: Why Your CRM Can't Replace a Dedicated Compensation Platform",
+    excerpt:
+      "CRMs can track deals, but they can't govern compensation logic, auditability, and dispute resolution at the scale modern sales teams require.",
+    date: "August 12, 2026",
+    readTime: "5 min read",
+    tag: "ICM vs CRM",
+  },
 ];
 
 export const guideItems: GuideItem[] = [
