@@ -7,13 +7,17 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { IconArrow } from "@/components/ui/icons";
 import { withLogo } from "@/components/ui/ServiceNowLogo";
-import { blogPosts } from "@/content/resources";
+import { supabasePublic } from "@/lib/supabase";
 
 export const metadata: Metadata = {
   title: "Blog — IncentIQ",
   description:
     "Stay ahead with insights on compensation strategy, incentive design, revenue operations, AI innovation, and enterprise performance management.",
 };
+
+/* Matches the article page, so a post published in the admin panel appears
+   here within a minute instead of needing a deploy. */
+export const revalidate = 60;
 
 const tagColors: Record<string, string> = {
   "AI & Analytics": "bg-light-green text-dark-green",
@@ -26,7 +30,41 @@ function tagStyle(tag: string) {
   return tagColors[tag] ?? "bg-light-green text-dark-green";
 }
 
-export default function BlogPage() {
+function formatDate(value: string | null): string {
+  if (!value) return "";
+  return new Date(value).toLocaleDateString("en-US", {
+    year: "numeric", month: "long", day: "numeric",
+  });
+}
+
+/* Supabase can type a to-one join as an array; normalise both shapes. */
+type CategoryRef = { name?: string | null } | Array<{ name?: string | null }> | null;
+
+function categoryName(category: CategoryRef): string {
+  if (!category) return "Insights";
+  const first = Array.isArray(category) ? category[0] : category;
+  return first?.name ?? "Insights";
+}
+
+export default async function BlogPage() {
+  /* Reads the same table the admin panel writes to. This listing used to map
+     over a hardcoded array in content/resources.ts, so anything published
+     from the panel simply never showed up here. */
+  const { data } = await supabasePublic
+    .from("posts")
+    .select("slug, title, excerpt, published_at, reading_time, category:categories(name)")
+    .eq("status", "PUBLISHED")
+    .order("published_at", { ascending: false });
+
+  const blogPosts = (data ?? []).map((post) => ({
+    slug: post.slug as string,
+    title: post.title as string,
+    excerpt: (post.excerpt as string | null) ?? "",
+    date: formatDate(post.published_at as string | null),
+    readTime: `${(post.reading_time as number | null) ?? 5} min read`,
+    tag: categoryName(post.category as CategoryRef),
+  }));
+
   return (
     <>
       <Navbar />
@@ -41,6 +79,9 @@ export default function BlogPage() {
 
         <section className="py-14 sm:py-16">
           <div className="shell">
+            {blogPosts.length === 0 && (
+              <p className="py-10 text-center text-[14px] text-slate">No posts published yet.</p>
+            )}
             <RevealGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
               {blogPosts.map((post) => (
                 <RevealItem key={post.slug}>
