@@ -31,6 +31,27 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   const { tagIds, ...d } = parsed.data;
   const readingTime = calculateReadingTime(d.content);
 
+  /* The editor sends "" for an unset category, and "" is not nullish — so
+     `?? null` lets it through to a uuid column, which Postgres rejects with
+     22P02 and the whole update fails. Empty strings have to become nulls. */
+  const categoryId  = d.categoryId  || null;
+  const scheduledAt = d.scheduledAt || null;
+
+  /* The edit form never loads publishedAt, so it always posts back empty —
+     taken literally that would erase the publish date of every post on each
+     save. Keep whatever is already stored, and stamp one the first time a
+     post is switched to PUBLISHED. */
+  const { data: existing } = await supabase
+    .from("posts")
+    .select("published_at")
+    .eq("id", params.id)
+    .single();
+
+  const publishedAt =
+    d.publishedAt ||
+    existing?.published_at ||
+    (d.status === "PUBLISHED" ? new Date().toISOString() : null);
+
   const { data: post, error } = await supabase
     .from("posts")
     .update({
@@ -40,8 +61,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       content:          d.content,
       featured_image:   d.featuredImage,
       status:           d.status,
-      published_at:     d.publishedAt  ?? null,
-      scheduled_at:     d.scheduledAt  ?? null,
+      published_at:     publishedAt,
+      scheduled_at:     scheduledAt,
       meta_title:       d.metaTitle,
       meta_description: d.metaDescription,
       keywords:         d.keywords,
@@ -52,7 +73,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       no_index:         d.noIndex,
       no_follow:        d.noFollow,
       reading_time:     readingTime,
-      category_id:      d.categoryId   ?? null,
+      category_id:      categoryId,
     })
     .eq("id", params.id)
     .select("*, author:users(id,name,avatar), category:categories(*)")

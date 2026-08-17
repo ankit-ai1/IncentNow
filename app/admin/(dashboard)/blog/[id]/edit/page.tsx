@@ -90,7 +90,16 @@ export default function EditBlogPostPage() {
       toast({ title: "Post updated!", description: "Your changes have been saved." });
       router.push("/admin/blog");
     } else {
-      toast({ title: "Error", description: "Failed to update post." });
+      /* Surface what the server actually said — a generic message here hid a
+         Postgres type error for a long time. */
+      const detail = await res.json().catch(() => null);
+      toast({
+        title: "Error",
+        description:
+          typeof detail?.error === "string"
+            ? detail.error
+            : `Failed to update post (${res.status}).`,
+      });
       setSaving(false);
     }
   }

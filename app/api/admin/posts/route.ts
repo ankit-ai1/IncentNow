@@ -44,6 +44,16 @@ export async function POST(req: NextRequest) {
   const { tagIds, ...d } = parsed.data;
   const readingTime = calculateReadingTime(d.content);
 
+  /* The editor sends "" for an unset category, and "" is not nullish — so
+     `?? null` lets it through to a uuid column, which Postgres rejects with
+     22P02. Empty strings have to become real nulls. */
+  const categoryId  = d.categoryId  || null;
+  const scheduledAt = d.scheduledAt || null;
+  /* Stamp a publish date the moment a post goes live; the form has no date
+     field, so otherwise a PUBLISHED post carries a null published_at and
+     sorts ahead of everything (Postgres orders DESC as NULLS FIRST). */
+  const publishedAt = d.publishedAt || (d.status === "PUBLISHED" ? new Date().toISOString() : null);
+
   const { data: post, error } = await supabase
     .from("posts")
     .insert({
@@ -53,8 +63,8 @@ export async function POST(req: NextRequest) {
       content:          d.content,
       featured_image:   d.featuredImage,
       status:           d.status,
-      published_at:     d.publishedAt  ?? null,
-      scheduled_at:     d.scheduledAt  ?? null,
+      published_at:     publishedAt,
+      scheduled_at:     scheduledAt,
       meta_title:       d.metaTitle,
       meta_description: d.metaDescription,
       keywords:         d.keywords,
@@ -65,7 +75,7 @@ export async function POST(req: NextRequest) {
       no_index:         d.noIndex,
       no_follow:        d.noFollow,
       reading_time:     readingTime,
-      category_id:      d.categoryId   ?? null,
+      category_id:      categoryId,
       author_id:        session.user?.id ?? "",
     })
     .select("*, author:users(id,name,avatar), category:categories(*)")

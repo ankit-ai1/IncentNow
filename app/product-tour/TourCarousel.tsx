@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, useEffect, useRef, memo } from "react";
 import {
   IconData, IconWorkflow, IconScale, IconGovernance, IconPlan, IconOrg,
   IconBusinessUnit, IconVisibility, IconQuota, IconStatement, IconDispute,
@@ -220,22 +220,63 @@ const FeatureCards = memo(function FeatureCards({ features }: { features: Featur
 
 export function TourCarousel() {
   const [tabIdx, setTabIdx] = useState(0);
+  /* Playback lives here, not in the carousel: the carousel remounts on every
+     tab change, and the reel has to keep running straight through. */
+  const [playing, setPlaying] = useState(false);
   const tab = TABS[tabIdx];
 
   const switchTab = useCallback((index: number) => {
+    setPlaying(false);
     setTabIdx(index);
+  }, []);
+
+  /* Last slide of a stage rolls into the next stage, and the final stage
+     loops back to the start — so "play" runs the entire tour unattended. */
+  const advanceStage = useCallback(() => {
+    setTabIdx((i) => (i + 1) % TABS.length);
+  }, []);
+
+  /* The hero's "Let's get started" both scrolls here and rolls the tape. */
+  useEffect(() => {
+    const start = () => setPlaying(true);
+    window.addEventListener("incentiq:play-tour", start);
+    return () => window.removeEventListener("incentiq:play-tour", start);
+  }, []);
+
+  /* Don't keep cycling stages once the viewer is off screen. */
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => { if (!e.isIntersecting) setPlaying(false); },
+      { threshold: 0.25 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   /* ── Render ── */
   return (
     <>
-      {/* Tour section */}
-      <section id="tour-section" className="scroll-mt-[80px] py-8">
-        <div className="shell">
+      {/* Tour section — one screen: tabs, stage banner, viewer and transport
+          all visible together, with the viewer absorbing the leftover height.
+
+          The height is DEFINITE, not a minimum: `flex-1` children only shrink
+          when the container's height is resolvable, otherwise the viewer sizes
+          to its own content and runs off the bottom of the screen. The budget
+          subtracts the fixed navbar so scrolling here from the hero lands the
+          whole stage in the visible area below it. */}
+      <section
+        ref={sectionRef}
+        id="tour-section"
+        className="flex h-[calc(100svh-72px)] min-h-[580px] scroll-mt-[72px] flex-col overflow-hidden py-3"
+      >
+        <div className="shell flex min-h-0 flex-1 flex-col">
 
           {/* ── 1. Tab pills ── */}
           <div
-            className="flex justify-center overflow-x-auto"
+            className="flex shrink-0 justify-center overflow-x-auto"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
           >
             <div
@@ -260,13 +301,15 @@ export function TourCarousel() {
                     aria-controls={`panel-${t.id}`}
                     onClick={() => switchTab(i)}
                     className={[
-                      "relative flex flex-col items-center whitespace-nowrap rounded-xl transition-all duration-200",
+                      /* Dot sits inline, not stacked — the tab strip's height
+                         is height the screenshot below doesn't get. */
+                      "relative flex items-center gap-1.5 whitespace-nowrap rounded-xl transition-all duration-200",
                       isActive
                         ? "bg-[#00A651] text-white font-semibold"
                         : "bg-transparent text-[#475569] font-medium hover:bg-[#E8F5E9] hover:text-[#00A651]",
                     ].join(" ")}
                     style={{
-                      padding: "6px 14px",
+                      padding: "5px 13px",
                       fontSize: "12.5px",
                       boxShadow: isActive ? "0 2px 8px rgba(0,166,81,0.25)" : "none",
                     }}
@@ -278,8 +321,7 @@ export function TourCarousel() {
                         width: "4px",
                         height: "4px",
                         borderRadius: "50%",
-                        marginBottom: "3px",
-                        background: isActive ? "rgba(255,255,255,0.8)" : "transparent",
+                        background: isActive ? "rgba(255,255,255,0.85)" : "transparent",
                         transition: "background 200ms ease",
                         flexShrink: 0,
                       }}
@@ -292,18 +334,29 @@ export function TourCarousel() {
           </div>
 
           {/* ── Tab panel ── */}
-          <div id={`panel-${tab.id}`} role="tabpanel" aria-labelledby={`tab-${tab.id}`}>
+          <div
+            id={`panel-${tab.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${tab.id}`}
+            className="flex min-h-0 flex-1 flex-col"
+          >
 
-            {/* ── 2. Stage banner ── */}
-            <div className="mt-4 flex items-center gap-3.5 rounded-xl border border-green/15 bg-light-green px-5 py-3.5">
-              <span className="h-2 w-2 shrink-0 rounded-full bg-green" aria-hidden />
-              <span className="eyebrow mr-3">Stage {tabIdx + 1} of {TABS.length}</span>
-              <p className="text-[14.5px] font-semibold leading-snug text-dark-green">{tab.banner}</p>
-            </div>
-
-            {/* ── 3. Screenshot carousel ── */}
-            <div className="mt-4">
-              <SlideCarousel key={tabIdx} slides={tab.slides} slug={tab.id} />
+            {/* ── 2. Screenshot viewer — absorbs the remaining height ──
+                The stage heading rides inside the viewer rather than in a
+                band above it: the screenshot is height-bound here, so chrome
+                above the frame comes straight out of the image. */}
+            {/* Keyed on the tab so the carousel resets to step 1, and so the
+                whole panel eases in rather than popping. */}
+            <div key={tabIdx} className="animate-caption-rise mt-3 min-h-0 flex-1">
+              <SlideCarousel
+                fill
+                slides={tab.slides}
+                slug={tab.id}
+                eyebrow={`Stage ${tabIdx + 1} / ${TABS.length}`}
+                playing={playing}
+                onPlayingChange={setPlaying}
+                onComplete={advanceStage}
+              />
             </div>
 
           </div>
