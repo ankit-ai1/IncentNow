@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { supabase, mapPost } from "@/lib/supabase";
 import { blogSchema } from "@/lib/validations/blog";
 import { calculateReadingTime } from "@/lib/utils";
+import { normalizeBlogHtml } from "@/lib/blog-content";
 
 export const dynamic = "force-dynamic";
 
@@ -29,7 +30,10 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
 
   const { tagIds, ...d } = parsed.data;
-  const readingTime = calculateReadingTime(d.content);
+  /* Store clean markup so the site's typography and the h2-driven table of
+     contents work no matter where the text was written. */
+  const content = normalizeBlogHtml(d.content);
+  const readingTime = calculateReadingTime(content);
 
   /* The editor sends "" for an unset category, and "" is not nullish — so
      `?? null` lets it through to a uuid column, which Postgres rejects with
@@ -58,7 +62,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       title:            d.title,
       slug:             d.slug,
       excerpt:          d.excerpt,
-      content:          d.content,
+      content,
       featured_image:   d.featuredImage,
       status:           d.status,
       published_at:     publishedAt,
