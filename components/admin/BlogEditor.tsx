@@ -17,6 +17,7 @@ import {
   Heading1, Heading2, Heading3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { normalizeBlogHtml } from "@/lib/blog-content";
 import { useEffect } from "react";
 
 interface BlogEditorProps {
@@ -70,6 +71,10 @@ export function BlogEditor({ content, onChange }: BlogEditorProps) {
       attributes: {
         class: "min-h-[400px] p-5 outline-none prose prose-sm max-w-none text-dark-green",
       },
+      /* Clean Word/Docs markup on the way in, so what you see while writing is
+         what the published article will be. The API applies the same pass, so
+         content stays correct even if it arrives some other way. */
+      transformPastedHTML: (html) => normalizeBlogHtml(html),
     },
   });
 
