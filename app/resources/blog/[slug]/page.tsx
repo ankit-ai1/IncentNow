@@ -97,7 +97,13 @@ function tagHeadings(html: string): { html: string; headings: TocHeading[] } {
   const seen = new Map<string, number>();
   const headings: TocHeading[] = [];
 
-  const tagged = html.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/gi, (_match, attrs, inner) => {
+  /* The editor's toolbar offers H1, and authors reach for it as "section
+     heading" — but the page already renders the post title as the h1, and a
+     body h1 would both duplicate it for SEO and slip past the h2-only scan
+     below, leaving the article with no table of contents. Demote first. */
+  const normalised = html.replace(/<(\/?)h1(\s[^>]*)?>/gi, (_m, slash, attrs) => `<${slash}h2${attrs ?? ""}>`);
+
+  const tagged = normalised.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/gi, (_match, attrs, inner) => {
     const text = inner.replace(/<[^>]+>/g, "").trim();
     let id = slugify(text) || `section-${headings.length + 1}`;
     const count = seen.get(id) ?? 0;
@@ -158,8 +164,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       }));
   }
 
-  const contentHtml = post ? tagHeadings(post.content).html : tagHeadings(fallbackPost.content).html;
-  const headings = post ? tagHeadings(post.content).headings : tagHeadings(fallbackPost.content).headings;
+  const { html: contentHtml, headings } = tagHeadings(
+    (post ? post.content : fallbackPost.content) ?? "",
+  );
+  const hasToc = headings.length > 0;
 
   return (
     <>
@@ -225,10 +233,14 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         {/* article body */}
         <article className="py-14 sm:py-16">
           <div className="shell">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[260px_1fr]">
-              <TableOfContents headings={headings} />
+            {/* Two tracks only when there is a TOC to fill the first one.
+                TableOfContents renders null with no headings, and a lone
+                child would then be placed in the 260px track — which is how
+                an article with no h2 ended up squeezed into a sidebar. */}
+            <div className={hasToc ? "grid grid-cols-1 gap-10 lg:grid-cols-[260px_1fr]" : ""}>
+              {hasToc && <TableOfContents headings={headings} />}
 
-              <div className="max-w-2xl">
+              <div className={hasToc ? "max-w-2xl" : "mx-auto max-w-3xl"}>
                 <Reveal>
                   <div
                     className="prose prose-lg max-w-none [&_h2]:mt-14 [&_h2]:mb-4 [&_h2]:border-l-[3px] [&_h2]:border-green [&_h2]:pl-4 [&_h2]:font-display [&_h2]:text-[22px] [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-dark-green [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:font-display [&_h3]:text-[1.2rem] [&_h3]:font-bold [&_h3]:tracking-tight [&_h3]:text-dark-green [&_p]:mt-4 [&_p]:text-[16px] [&_p]:leading-[1.8] [&_p]:text-slate [&>*:first-child]:mt-0"
