@@ -68,7 +68,15 @@ export default function NewBlogPostPage() {
       toast({ title: "Post created!", description: "Your post has been saved." });
       router.push("/admin/blog");
     } else {
-      toast({ title: "Error", description: "Failed to create post." });
+      /* Surface what the server actually said rather than a generic message. */
+      const detail = await res.json().catch(() => null);
+      toast({
+        title: "Error",
+        description:
+          typeof detail?.error === "string"
+            ? detail.error
+            : `Failed to create post (${res.status}).`,
+      });
       setSaving(false);
     }
   }
